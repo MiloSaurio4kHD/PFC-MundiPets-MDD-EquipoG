@@ -1,0 +1,268 @@
+% ============================================================
+%  Exposición-demostración: MDD (UML -> Código)
+%  Asignatura: Ingeniería de Requisitos (ISR-401) -- UTEQ 2026-2027 PPA
+%  Sistema del PFC: MundiPets
+%  Plantilla de trabajo en equipo (guía visible por integrante)
+%  Formato: IEEE onecolumn | Biber + biblatex (estilo IEEE)
+% ============================================================
+\documentclass[journal,onecolumn]{IEEEtran}
+
+% ── Codificación e idioma ───────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[autostyle=true, spanish=mexican]{csquotes}
+
+% ── Tablas ──────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% ── Figuras ─────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{float}
+
+% ── Color y enlaces ─────────────────────────────────────────
+\usepackage{xcolor}
+
+% ── Geometría ───────────────────────────────────────────────
+\usepackage{geometry}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+% ── Encabezado ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small Exposición-demostración MDD -- Ingeniería de Requisitos}
+\fancyhead[R]{\small MundiPets -- UML a Código}
+\fancyfoot[C]{\thepage}
+
+% ── Espaciado ───────────────────────────────────────────────
+\usepackage{parskip}
+\setlength{\parskip}{4pt}
+\makeatletter
+\@ifundefined{labelindent}{}{\let\labelindent\relax}
+\makeatother
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{titlesec}
+\captionsetup{font=small, labelfont=bf}
+\usepackage{amssymb}
+
+% ── Forzar "Tabla" en lugar de "Cuadro" ──────────────────────
+\renewcommand{\thetable}{\arabic{table}}
+\def\tablename{Tabla}
+
+% ── Caja de guía (fondo gris claro, borde negro) ─────────────
+\usepackage{mdframed}
+\mdfdefinestyle{guia}{
+  linecolor=black,
+  linewidth=0.6pt,
+  backgroundcolor=gray!10,
+  innertopmargin=6pt,
+  innerbottommargin=6pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  skipabove=4pt,
+  skipbelow=4pt
+}
+
+% ── Comando de caja de guía (Responsable) ────────────────────
+\newcommand{\guia}[2]{%
+  \begin{mdframed}[style=guia]
+    \noindent\textbf{Responsable: #1}\\[2pt]
+    #2
+  \end{mdframed}
+}
+
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% ── Bibliografía: biblatex + biber, estilo IEEE ──────────────
+\usepackage[
+  backend=biber,
+  style=ieee,
+  citestyle=numeric-comp,
+  isbn=true,
+  doi=true
+]{biblatex}
+\addbibresource{referencias.bib}
+
+\usepackage[hidelinks,colorlinks=false]{hyperref}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\begin{document}
+	\begin{titlepage}
+	\centering
+
+	{\large\bfseries UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO\\[12pt]}
+
+	\includegraphics[width=0.3\textwidth]{figuras/logo_uteq.png}\\[12pt]
+
+	{\large\bfseries FACULTAD DE CIENCIAS DE LA COMPUTACIÓN Y DISEÑO DIGITAL\\[4pt]
+		CARRERA DE INGENIERÍA EN SOFTWARE}
+
+	\vspace{1cm}
+
+	{\normalsize\bfseries TEMA:}\\[4pt]
+	{\normalsize GA – EXPOSICIÓN SEGUNDO CORTE: HERRAMIENTAS CASE (VISUAL PARADIGM) — CICLO MDD APLICADO A MUNDIPETS: GENERACIÓN DE CÓDIGO A PARTIR DE MODELOS UML}\\[4pt]
+	\vspace{1cm}
+
+	{\normalsize\bfseries MATERIA:}\\[4pt]
+	{\normalsize INGENIERÍA DE REQUISITOS}
+
+	\vspace{1cm}
+
+	{\normalsize\bfseries DOCENTE:}\\[4pt]
+	{\normalsize ING. GUERRERO ULLOA GLEISTON CICERÓN, PhD.}
+
+	\vspace{1cm}
+
+	{\normalsize\bfseries INTEGRANTES:}\\[6pt]
+
+	\textit{\textbf{FUERTES ARRAES EDSON DANIEL}},~CI: 0929115087,~Correo: efuertesa2@uteq.edu.ec\\
+
+	\vspace{0.5cm}
+
+	\textit{CEDEÑO AVILA WINSTON DAMIAN},~CI: 0000000000,~Correo: wcedenoa2@uteq.edu.ec\\
+
+	\vspace{0.5cm}
+
+	\textit{CEDEÑO CORONADO WILSON LIZANDRO},~CI: 1206867200,~Correo: wcedenoc2@uteq.edu.ec
+
+	\vspace{1cm}
+
+	{\normalsize\bfseries CURSO:}\\[4pt]
+	{\normalsize CUARTO SEMESTRE}
+
+	\vspace{1cm}
+
+	{\normalsize\bfseries Versión del documento:} 1.0 \quad\textbf{Repositorio GitHub:}\\
+	\url{https://github.com/MiloSaurio4kHD/PFC-MundiPets-MDD-EquipoG.git}
+
+	\vspace{0.5cm}
+
+	{\normalsize\bfseries QUEVEDO -- LOS RÍOS -- ECUADOR}\\[4pt]
+	{\normalsize\bfseries 2026 -- 2027 PPA}
+
+\end{titlepage}
+
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+% ============================================================
+% 1. RESUMEN
+% ============================================================
+\section{Resumen}
+
+% ============================================================
+% 2. MARCO TEÓRICO
+% ============================================================
+\section{Marco teórico}
+
+% ============================================================
+% 3. JUSTIFICACIÓN DE LA HERRAMIENTA
+% ============================================================
+\section{Justificación de la herramienta MDD seleccionada}
+
+% ============================================================
+% 4. DESCRIPCIÓN DEL SUBSISTEMA MODELADO
+% ============================================================
+\section{Descripción del subsistema del PFC modelado}
+
+% ============================================================
+% 5. MODELO UML DE ORIGEN
+% ============================================================
+\section{Modelo UML de origen}
+
+\subsection{Diagrama de clases}\label{sec:diagrama_clases}
+
+\subsection{Diagramas complementarios (si aportan)}\label{sec:diagramas_complementarios}
+
+% ============================================================
+% 6. CONFIGURACIÓN DEL MECANISMO DE GENERACIÓN
+% ============================================================
+\section{Configuración del mecanismo de generación}
+
+% ============================================================
+% 7. PROCESO DE GENERACIÓN
+% ============================================================
+\section{Proceso de generación de código}
+
+% ============================================================
+% 8. VERIFICACIÓN DEL CÓDIGO GENERADO
+% ============================================================
+\section{Verificación del código generado}
+
+% ============================================================
+% 9. CIERRE DEL CICLO (ROUNDTRIP)
+% ============================================================
+\section{Cierre del ciclo (roundtrip) y trazabilidad}
+
+% ============================================================
+% 10. REPARTO DEL TRABAJO
+% ============================================================
+\section{Reparto del trabajo por integrante}
+
+% ============================================================
+% 11. CONCLUSIONES
+% ============================================================
+\section{Conclusiones}
+
+% ============================================================
+% REFERENCIAS
+% ============================================================
+\section{Referencias}
+
+\printbibliography[heading=none]
+
+\section*{Anexos}
+\addcontentsline{toc}{section}{Anexos}
+
+\section*{Estructura del repositorio GitHub}
+
+\begin{verbatim}
+PFC-MundiPets-MDD-EquipoG/
+  README.md
+  docs/
+    informe.tex
+    informe.pdf
+    referencias.bib
+    figuras/
+  modelo/
+    <proyecto_nativo>.vpp
+  perfiles/
+  plantillas/
+  generado/
+  evidencias/
+    capturas/
+    video-demo.mp4
+  exposicion/
+    diapositivas.pdf
+\end{verbatim}
+
+\section*{Anexos adicionales}
+
+\subsection*{Tabla de mapeo extensa (modelo \(\to\) código)}\label{sec:anexo_mapeo}
+
+\subsection*{Listados de código representativo (fragmentos)}\label{sec:anexo_codigo}
+
+\subsection*{Instrucciones detalladas de reproducibilidad}\label{sec:anexo_instrucciones}
+
+\end{document}

@@ -9,6 +9,7 @@
 *.out
 *.run.xml
 *.synctex.gz
+*.synctex(busy)
 *.toc
 *.fdb_latexmk
 *.fls
