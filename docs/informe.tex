@@ -1,18 +1,17 @@
 % ============================================================
-%  Exposición-demostración: MDD (UML -> Código)
-%  Asignatura: Ingeniería de Requisitos (ISR-401) -- UTEQ 2026-2027 PPA
-%  Sistema del PFC: MundiPets
-%  Plantilla de trabajo en equipo (guía visible por integrante)
+%  Exposicion-demostracion: MDD (UML -> Codigo) -- MundiPets
+%  Ingenieria de Requisitos -- UTEQ 2026-2027 PPA
 %  Formato: IEEE onecolumn | Biber + biblatex (estilo IEEE)
 % ============================================================
 \documentclass[journal,onecolumn]{IEEEtran}
 
-% ── Codificación e idioma ───────────────────────────────────
+% ── Codificacion e idioma ───────────────────────────────────
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish, es-tabla]{babel}
 \usepackage[autostyle=true, spanish=mexican]{csquotes}
 \usepackage[htt]{hyphenat}
+
 % ── Tablas ──────────────────────────────────────────────────
 \usepackage{booktabs}
 \usepackage{tabularx}
@@ -21,15 +20,17 @@
 \usepackage{longtable}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\renewcommand{\thetable}{\arabic{table}}
+\def\tablename{Tabla}
 
 % ── Figuras ─────────────────────────────────────────────────
 \usepackage{graphicx}
 \usepackage{float}
 
-% ── Color y enlaces ─────────────────────────────────────────
+% ── Color ───────────────────────────────────────────────────
 \usepackage{xcolor}
 
-% ── Código fuente (C#) ──────────────────────────────────────
+% ── Codigo fuente (C#) ──────────────────────────────────────
 \usepackage{listings}
 \definecolor{codegray}{gray}{0.95}
 \definecolor{codegreen}{rgb}{0.0,0.5,0.0}
@@ -53,45 +54,47 @@
 	captionpos=b
 }
 \lstset{style=csharp}
+\renewcommand{\lstlistingname}{Código}
+\renewcommand{\lstlistlistingname}{Índice de códigos de clase}
 
-% ── Geometría ───────────────────────────────────────────────
+% ── Geometria ───────────────────────────────────────────────
 \usepackage{geometry}
 \geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
 
-% ── Encabezado ──────────────────────────────────────────────
+% ── Encabezado y pie ────────────────────────────────────────
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.4pt}
-\fancyhead[L]{\small Exposición-demostración MDD -- Ingeniería de Requisitos}
-\fancyhead[R]{\small MundiPets -- Visual Paradigm a Código}
+\fancyhead[L]{\small Exposicion-demostracion MDD -- Ingenieria de Requisitos}
+\fancyhead[R]{\small MundiPets -- Visual Paradigm UML a Codigo}
 \fancyfoot[C]{\thepage}
 
-% ── Espaciado ───────────────────────────────────────────────
+% ── Espaciado y listas ──────────────────────────────────────
 \usepackage{parskip}
 \setlength{\parskip}{4pt}
 \makeatletter
 \@ifundefined{labelindent}{}{\let\labelindent\relax}
 \makeatother
 \usepackage{enumitem}
-\usepackage{caption}
-\usepackage{titlesec}
-\captionsetup{font=small, labelfont=bf}
 \usepackage{amssymb}
 
-% ── Forzar "Tabla" en lugar de "Cuadro" ──────────────────────
-\renewcommand{\thetable}{\arabic{table}}
-\def\tablename{Tabla}
-
+% ── Titulos de seccion ──────────────────────────────────────
+\usepackage{titlesec}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
-
 \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
 
-% ── Bibliografía: biblatex + biber, estilo IEEE ──────────────
+% ── Leyendas ────────────────────────────────────────────────
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+% ── Bibliografia (biber + estilo IEEE) ──────────────────────
 \usepackage[
 backend=biber,
 style=ieee,
@@ -101,10 +104,8 @@ doi=true
 ]{biblatex}
 \addbibresource{referencias.bib}
 
+% ── Enlaces ─────────────────────────────────────────────────
 \usepackage[hidelinks,colorlinks=false]{hyperref}
-
-\setcounter{secnumdepth}{4}
-\setcounter{tocdepth}{4}
 
 \begin{document}
 	\begin{titlepage}
@@ -112,7 +113,7 @@ doi=true
 		
 		{\large\bfseries UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO\\[12pt]}
 		
-		\includegraphics[width=0.3\textwidth]{figuras/logo_uteq.png}\\[12pt]
+		\includegraphics[width=0.2\textwidth]{figuras/logo_uteq.png}\\[12pt]
 		
 		{\large\bfseries FACULTAD DE CIENCIAS DE LA COMPUTACIÓN Y DISEÑO DIGITAL\\[4pt]
 			CARRERA DE INGENIERÍA EN SOFTWARE}
@@ -127,10 +128,14 @@ doi=true
 		{\normalsize\bfseries MATERIA:}\\[4pt]
 		{\normalsize INGENIERÍA EN REQUERIMIENTOS}
 		
-		\vspace{1cm}
+		\vspace{0.5cm}
 		
 		{\normalsize\bfseries DOCENTE:}\\[4pt]
 		{\normalsize ING. GUERRERO ULLOA GLEISTON CICERÓN, PhD.}
+		
+		\vspace{0.5cm}
+		
+		{\normalsize\bfseries EQUIPO G}\\[4pt]
 		
 		\vspace{0.5cm}
 		
@@ -149,11 +154,7 @@ doi=true
 		\textit{CEDEÑO CORONADO WILSON LIZANDRO},~CI: 1206867200,~Correo: wcedenoc2@uteq.edu.ec\\
 		{\small Rol: Justificación de la herramienta MDD}
 		
-		\vspace{0.3cm}
-		
-		{\normalsize\bfseries EQUIPO G}\\[4pt]
-		
-		\vspace{0.3cm}
+		\vspace{0.5cm}
 		
 		{\normalsize\bfseries CURSO:}\\[4pt]
 		{\normalsize CUARTO SEMESTRE INGENIERÍA EN SOFTWARE \enquote{B}}
@@ -161,7 +162,7 @@ doi=true
 		\vspace{1cm}
 		
 		{\normalsize\bfseries SISTEMA PROYECTO FIN DE CURSO:}\\[4pt]
-		{\normalsize MUNDIPETS (DANIEL FUERTES - TITULAR PFC))}\\[4pt]
+		{\normalsize MUNDIPETS (DANIEL FUERTES - TITULAR PFC)}\\[4pt]
 		\vspace{0.5cm}
 		
 		
@@ -178,8 +179,8 @@ doi=true
 	\tableofcontents
 	\newpage
 	\listoffigures
-	\newpage
 	\listoftables
+	\lstlistoflistings
 	\newpage
 	% ============================================================
 	% 1. RESUMEN
@@ -451,21 +452,22 @@ doi=true
 	
 	\subsection{Perfiles y estereotipos aplicados}\label{sec:perfiles_estereotipos}
 	
-	Para dirigir el generador se definió un perfil UML propio dentro del proyecto de Visual Paradigm, conservado en \texttt{modelo/perfiles/MundiPets-DiagramaPerfil.vpp}. El perfil declara los estereotipos \guillemotleft Entity\guillemotright, \guillemotleft Service\guillemotright{} y \guillemotleft Controller\guillemotright, cada uno extendiendo la metaclase \texttt{Class} del metamodelo UML mediante una relación de extensión; esta extensión establece que los estereotipos solo pueden aplicarse a elementos de tipo clase. La Figura~\ref{fig:perfil} muestra el diagrama de perfil.
+	Para comprender el mecanismo de extensión de UML se construyó un perfil propio dentro del proyecto de Visual Paradigm, conservado en \texttt{modelo/perfiles/MundiPets-DiagramaPerfil.vpp}. Un perfil UML permite especializar el lenguaje mediante estereotipos que extienden metaclases del metamodelo, junto con valores etiquetados (\emph{tagged values}) que añaden metadatos. La Figura~\ref{fig:perfil} muestra el diagrama de perfil elaborado.
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.75\linewidth]{figuras/MundiPets.DiagramaPerfil.png}
+		\includegraphics[width=\linewidth]{figuras/MundiPets.DiagramaPerfil.png}
 		\caption{Diagrama de perfil UML con los estereotipos definidos.}
 		\label{fig:perfil}
 	\end{figure}
 	
-	Además de los estereotipos, el perfil incorpora valores etiquetados (\emph{tagged values}) que ilustran cómo un perfil transporta metadatos que UML puro no puede expresar; por ejemplo, al estereotipo \guillemotleft Entity\guillemotright{} se le definieron los tags \texttt{tableName} y \texttt{persistente}, que un generador podría leer para producir anotaciones de persistencia.
+	El perfil define cuatro estereotipos que ilustran distintas posibilidades de extensión: \guillemotleft Service\guillemotright{} y \guillemotleft API\guillemotright{} extienden la metaclase \texttt{Class}, \guillemotleft Sistema Externo\guillemotright{} extiende también \texttt{Class}, y \guillemotleft LimiteSistema\guillemotright{} extiende la metaclase \texttt{System}. Cada estereotipo incorpora valores etiquetados que demuestran cómo un perfil transporta metadatos que UML puro no puede expresar: por ejemplo, \guillemotleft Service\guillemotright{} declara los tags \texttt{capa} (de tipo texto) y un indicador booleano, mientras que \guillemotleft API\guillemotright{} declara \texttt{APIName}, \texttt{Descripcion} y \texttt{PrecioAPI}. La relación de extensión entre cada estereotipo y su metaclase, indicada entre paréntesis en el diagrama (p.\,ej. \texttt{(Class)} o \texttt{(System)}), establece a qué tipo de elemento puede aplicarse.
 	
-	En el subsistema modelado se aplicó el estereotipo \guillemotleft Entity\guillemotright{} sobre las ocho clases del dominio, indicando que todas son entidades de datos. Los estereotipos \guillemotleft Service\guillemotright{} y \guillemotleft Controller\guillemotright{} se definieron en el perfil como parte de una arquitectura en capas prevista para fases posteriores del PFC (lógica de negocio y controladores), pero no se aplican en este diagrama porque su alcance se limita a la capa de dominio. Esta decisión es intencional y evita introducir estereotipos sin correspondencia real en el modelo.
+	Es importante distinguir este perfil, elaborado como demostración del mecanismo de extensión, del estereotipo efectivamente aplicado en el diagrama de clases del subsistema. Sobre las ocho clases del dominio se aplicó el estereotipo \guillemotleft Entity\guillemotright{} (definido a nivel de proyecto), que indica que todas son entidades de datos y que el generador interpreta para producir cada clase con sus campos y métodos de acceso. Los estereotipos del perfil de la Figura~\ref{fig:perfil} no se aplican a las clases del dominio: se mantienen como ejemplo del alcance de un perfil UML para posibles capas o integraciones en fases posteriores del PFC.
 	
 	% ============================================================
 	% 6. CONFIGURACIÓN DEL MECANISMO DE GENERACIÓN
+	
 	% ============================================================
 	\section{Configuración del mecanismo de generación}
 	
@@ -500,12 +502,12 @@ doi=true
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.9\linewidth]{figuras/ConfiguracionInstantGeneratorMundiPets.png}
+		\includegraphics[width=\linewidth]{figuras/ConfiguracionInstantGeneratorMundiPets.png}
 		\caption{Configuración del Instant Generator en Visual Paradigm.}
 		\label{fig:config_generador}
 	\end{figure}
 	
-	\paragraph{Decisiones de mapeo.} A partir de la inspección de las plantillas y del código resultante se identificaron las siguientes reglas de transformación del modelo al lenguaje C\#:
+	\subsection{Decisiones de mapeo.} A partir de la inspección de las plantillas y del código resultante se identificaron las siguientes reglas de transformación del modelo al lenguaje C\#:
 	
 	\begin{itemize}[leftmargin=*, itemsep=2pt]
 		\item Cada \textbf{clase} UML produce un archivo \texttt{.cs} independiente con el mismo nombre y la sentencia \texttt{using System;}.
@@ -515,6 +517,35 @@ doi=true
 		\item Cada \textbf{asociación} genera un campo del tipo de la clase relacionada, tomando como nombre la etiqueta del rol definida en el diagrama; cuando la multiplicidad es de muchos, el campo se genera como \textbf{arreglo} de ese tipo (\texttt{Tipo[]}).
 		\item Cada \textbf{enumeración} produce un archivo \texttt{.cs} con la declaración \texttt{enum} y sus literales.
 	\end{itemize}
+	
+	\subsection{Plantillas utilizadas y su funcionamiento.} El código no se produce de forma monolítica: Instant Generator combina un conjunto de plantillas Velocity, cada una responsable de una parte del archivo generado. Las plantillas empleadas se conservan en la carpeta \texttt{plantillas/} del repositorio y se resumen en la Tabla~\ref{tab:plantillas}.
+	
+	\begin{table}[H]
+		\caption{Plantillas Velocity utilizadas por el generador.}
+		\label{tab:plantillas}
+		\centering
+		\begin{tabularx}{\linewidth}{|L{4.2cm}|X|}
+			\hline
+			\textbf{Plantilla} & \textbf{Responsabilidad} \\
+			\hline
+			\texttt{class.vm} & Estructura general de la clase: visibilidad, palabra clave \texttt{class}, apertura de llaves y recorrido de atributos, operaciones y asociaciones. \\
+			\hline
+			\texttt{attribute.vm} & Genera cada atributo como campo, o como propiedad si están activas las \emph{auto-implemented properties}. \\
+			\hline
+			\texttt{operation.vm} & Genera cada método con su firma y el cuerpo \texttt{throw new NotImplementedException()}. \\
+			\hline
+			\texttt{association.vm} & Traduce cada extremo navegable de asociación en un campo del tipo relacionado. \\
+			\hline
+			\texttt{parameter.vm} & Genera los parámetros de las operaciones con su tipo y nombre. \\
+			\hline
+			\texttt{enum.vm} & Genera la declaración \texttt{enum} y sus literales. \\
+			\hline
+			\texttt{auto-implemented-property.vm} & Produce propiedades con \texttt{\{ get; set; \}} cuando la opción está activada. \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	El funcionamiento se basa en el mecanismo de plantillas de Apache Velocity: cada archivo \texttt{.vm} mezcla texto fijo (que se emite tal cual al código) con directivas de Velocity que consultan el modelo. Por ejemplo, \texttt{class.vm} recorre los atributos de la clase con una directiva de iteración (\texttt{\#foreach}) y, por cada uno, invoca la plantilla \texttt{attribute.vm} mediante \texttt{\#parse}; a su vez, cada plantilla accede a los datos del modelo a través de referencias como \texttt{\$class.getClassName()} o \texttt{\$attribute.getVariableType()}. De esta forma, la estructura del código no está escrita a mano en el generador, sino que resulta de aplicar estas plantillas sobre cada elemento del diagrama, lo que explica por qué la salida es reproducible y coherente para todas las clases.
 	
 	% ============================================================
 	% 7. PROCESO DE GENERACIÓN
@@ -527,10 +558,12 @@ doi=true
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.85\linewidth]{figuras/ProcesoGeneracion.png}
+		\includegraphics[width=\linewidth]{figuras/ProcesoGeneracion.png}
 		\caption{Ejecución del Instant Generator y árbol de archivos generado.}
 		\label{fig:proceso_generacion}
 	\end{figure}
+	
+	\newpage
 	
 	% ============================================================
 	% 8. VERIFICACIÓN DEL CÓDIGO GENERADO
@@ -566,7 +599,7 @@ doi=true
 		\end{tabularx}
 	\end{table}
 	
-	Un fragmento representativo del código generado para la clase \texttt{Mascota} se muestra en el Listado~\ref{lst:mascota}.
+	Un fragmento representativo del código generado para la clase \texttt{Mascota} se muestra en el Código~\ref{lst:mascota}.
 	
 	\begin{lstlisting}[caption={Clase \texttt{Mascota} generada por Instant Generator (fragmento).}, label={lst:mascota}]
 		using System;
@@ -587,7 +620,7 @@ doi=true
 		}
 	\end{lstlisting}
 	
-	\paragraph{Limitaciones detectadas del generador.} La verificación permitió identificar con claridad qué produce el generador y qué queda a cargo del desarrollador:
+	\subsection{Limitaciones detectadas del generador.} La verificación permitió identificar con claridad qué produce el generador y qué queda a cargo del desarrollador:
 	
 	\begin{itemize}[leftmargin=*, itemsep=2pt]
 		\item Los \textbf{cuerpos de los métodos no se generan}: todas las operaciones se emiten con \texttt{throw new NotImplementedException()}, por lo que la lógica de negocio debe programarse manualmente.
@@ -608,20 +641,20 @@ doi=true
 	% ============================================================
 	\section{Cierre del ciclo (roundtrip) y trazabilidad}
 	
-	Para evidenciar el cierre del ciclo se ejecutó un cambio controlado sobre el modelo y se regeneró el código, comprobando que la modificación se reflejara en el proyecto. El cambio consistió en agregar un nuevo atributo a la clase \texttt{Mascota} en el diagrama de Visual Paradigm; tras volver a ejecutar Instant Generator sobre la misma configuración, el archivo \texttt{Mascota.cs} incorporó el campo correspondiente, demostrando la trazabilidad directa entre una modificación en el modelo y su materialización en el código.
+	Para evidenciar el cierre del ciclo se ejecutó un cambio controlado sobre el modelo y se regeneró el código, comprobando que la modificación se reflejara en el proyecto. El cambio consistió en agregar el atributo \texttt{-peso : float} a la clase \texttt{Mascota} en el diagrama de Visual Paradigm (Figura~\ref{fig:roundtrip_modelo}). Tras volver a ejecutar Instant Generator sobre la misma configuración, el archivo \texttt{Mascota.cs} incorporó el campo \texttt{private float peso;} (Figura~\ref{fig:roundtrip_codigo}), demostrando la trazabilidad directa entre una modificación en el modelo y su materialización en el código.
 	
 	Dado que las plantillas estándar de C\# regeneran el archivo completo bajo la política de sobrescritura, la trazabilidad modelo~$\to$~código es total para la estructura, pero cualquier lógica escrita manualmente en los cuerpos de los métodos se perdería en una regeneración salvo que se preserve mediante control de versiones o bloques protegidos. Esta observación es coherente con lo señalado en el marco teórico sobre los retos del \emph{round-trip engineering}~\cite{almutairi2022roundtrip}.
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.85\linewidth]{figuras/RoundtripModelo.png}
+		\includegraphics[width=\linewidth]{figuras/RoundtripModelo.png}
 		\caption{Modelo modificado con el nuevo atributo en la clase \texttt{Mascota}.}
 		\label{fig:roundtrip_modelo}
 	\end{figure}
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.85\linewidth]{figuras/RoundtripCodigo.png}
+		\includegraphics[width=\linewidth]{figuras/RoundtripCodigo.png}
 		\caption{Código regenerado con el nuevo atributo reflejado.}
 		\label{fig:roundtrip_codigo}
 	\end{figure}
@@ -672,7 +705,7 @@ doi=true
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.85\linewidth]{figuras/ContributorsGitHub.png}
+		\includegraphics[width=\linewidth]{figuras/ContributorsGitHub.png}
 		\caption{Contribuciones por integrante en GitHub (Insights $\to$ Contributors).}
 		\label{fig:contributors}
 	\end{figure}
@@ -695,6 +728,8 @@ doi=true
 	
 	\printbibliography[heading=none]
 	
+	\newpage
+	
 	\section*{Anexos}
 	\addcontentsline{toc}{section}{Anexos}
 	
@@ -707,17 +742,27 @@ doi=true
 		|   |-- informe.tex
 		|   |-- informe.pdf
 		|   |-- referencias.bib
-		|   `-- figuras/
+		|   `-- figuras/          (diagramas y capturas del informe)
 		|-- modelo/
 		|   |-- MundiPets-DiagramaClases.vpp
+		|   |-- MundiPets-DiagramaClases.png
 		|   `-- perfiles/
-		|       `-- MundiPets-DiagramaPerfil.vpp
+		|       |-- MundiPets-DiagramaPerfil.vpp
+		|       `-- MundiPets.DiagramaPerfil.png
 		|-- plantillas/
+		|   |-- class.vm  attribute.vm  operation.vm
+		|   |-- association.vm  parameter.vm  enum.vm
+		|   |-- auto-implemented-property.vm
+		|   `-- ConfiguracionInstantGeneratorMundiPets.png
 		|-- generado/
+		|   |-- *.cs             (10 clases generadas)
+		|   `-- MundiPets_Evidencia_CodigoGeneradoVPP/
+		|                        (solucion C# de Visual Studio)
 		|-- evidencias/
-		|   `-- capturas/
-		`-- exposicion/
-		`-- diapositivas.pdf
+		|   `-- capturas/        (capturas del proceso completo)
+		|-- exposicion/
+		|   `-- diapositivas.pdf
+		`-- borradores/          (aportes individuales por integrante)
 	\end{verbatim}
 	
 	\subsection*{Tabla de mapeo extensa (modelo \(\to\) código)}\label{sec:anexo_mapeo}
@@ -728,7 +773,7 @@ doi=true
 		\caption{Correspondencia completa modelo $\to$ código para el subsistema.}
 		\label{tab:mapeo_extenso}
 		\centering
-		\begin{tabularx}{\linewidth}{|L{3.5cm}|L{3cm}|X|}
+		\begin{tabularx}{\linewidth}{|L{3.5cm}|L{4cm}|X|}
 			\hline
 			\textbf{Clase UML} & \textbf{Archivo generado} & \textbf{Campos de asociación generados} \\
 			\hline
@@ -755,7 +800,9 @@ doi=true
 		\end{tabularx}
 	\end{table}
 	
-	\subsection*{Listados de código completo de las clases generadas}\label{sec:anexo_codigo}
+	\newpage
+	
+	\subsection*{Códigos completos de las clases generadas}\label{sec:anexo_codigo}
 	
 	Se presenta a continuación el código C\# completo generado por Instant Generator para las ocho clases del dominio y las dos enumeraciones del subsistema.
 	
@@ -815,6 +862,8 @@ doi=true
 			
 		}
 	\end{lstlisting}
+	
+	\newpage
 	
 	\begin{lstlisting}[caption={Clase \texttt{HistorialMedico}.}, label={lst:historialmedico}]
 		using System;
@@ -882,6 +931,8 @@ doi=true
 		}
 	\end{lstlisting}
 	
+	\newpage
+	
 	\begin{lstlisting}[caption={Clase \texttt{Vacuna}.}, label={lst:vacuna}]
 		using System;
 		
@@ -947,6 +998,8 @@ doi=true
 			
 		}
 	\end{lstlisting}
+	
+	\newpage
 	
 	\begin{lstlisting}[caption={Clase \texttt{TipoUsuario}.}, label={lst:tipousuario}]
 		using System;
