@@ -12,7 +12,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish, es-tabla]{babel}
 \usepackage[autostyle=true, spanish=mexican]{csquotes}
-
+\usepackage[htt]{hyphenat}
 % ── Tablas ──────────────────────────────────────────────────
 \usepackage{booktabs}
 \usepackage{tabularx}
@@ -29,6 +29,31 @@
 % ── Color y enlaces ─────────────────────────────────────────
 \usepackage{xcolor}
 
+% ── Código fuente (C#) ──────────────────────────────────────
+\usepackage{listings}
+\definecolor{codegray}{gray}{0.95}
+\definecolor{codegreen}{rgb}{0.0,0.5,0.0}
+\definecolor{codeblue}{rgb}{0.0,0.0,0.6}
+\definecolor{codepurple}{rgb}{0.5,0.0,0.35}
+\lstdefinestyle{csharp}{
+	language=[Sharp]C,
+	backgroundcolor=\color{codegray},
+	basicstyle=\ttfamily\footnotesize,
+	keywordstyle=\color{codeblue}\bfseries,
+	stringstyle=\color{codepurple},
+	commentstyle=\color{codegreen}\itshape,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	numbersep=6pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=single,
+	rulecolor=\color{gray!50},
+	tabsize=2,
+	captionpos=b
+}
+\lstset{style=csharp}
+
 % ── Geometría ───────────────────────────────────────────────
 \usepackage{geometry}
 \geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
@@ -39,7 +64,7 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.4pt}
 \fancyhead[L]{\small Exposición-demostración MDD -- Ingeniería de Requisitos}
-\fancyhead[R]{\small MundiPets -- UML a Código}
+\fancyhead[R]{\small MundiPets -- Visual Paradigm a Código}
 \fancyfoot[C]{\thepage}
 
 % ── Espaciado ───────────────────────────────────────────────
@@ -58,28 +83,6 @@
 \renewcommand{\thetable}{\arabic{table}}
 \def\tablename{Tabla}
 
-% ── Caja de guía (fondo gris claro, borde negro) ─────────────
-\usepackage{mdframed}
-\mdfdefinestyle{guia}{
-  linecolor=black,
-  linewidth=0.6pt,
-  backgroundcolor=gray!10,
-  innertopmargin=6pt,
-  innerbottommargin=6pt,
-  innerleftmargin=8pt,
-  innerrightmargin=8pt,
-  skipabove=4pt,
-  skipbelow=4pt
-}
-
-% ── Comando de caja de guía (Responsable) ────────────────────
-\newcommand{\guia}[2]{%
-  \begin{mdframed}[style=guia]
-    \noindent\textbf{Responsable: #1}\\[2pt]
-    #2
-  \end{mdframed}
-}
-
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
@@ -90,11 +93,11 @@
 
 % ── Bibliografía: biblatex + biber, estilo IEEE ──────────────
 \usepackage[
-  backend=biber,
-  style=ieee,
-  citestyle=numeric-comp,
-  isbn=true,
-  doi=true
+backend=biber,
+style=ieee,
+citestyle=numeric-comp,
+isbn=true,
+doi=true
 ]{biblatex}
 \addbibresource{referencias.bib}
 
@@ -105,164 +108,882 @@
 
 \begin{document}
 	\begin{titlepage}
-	\centering
-
-	{\large\bfseries UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO\\[12pt]}
-
-	\includegraphics[width=0.3\textwidth]{figuras/logo_uteq.png}\\[12pt]
-
-	{\large\bfseries FACULTAD DE CIENCIAS DE LA COMPUTACIÓN Y DISEÑO DIGITAL\\[4pt]
-		CARRERA DE INGENIERÍA EN SOFTWARE}
-
-	\vspace{1cm}
-
-	{\normalsize\bfseries TEMA:}\\[4pt]
-	{\normalsize GA – EXPOSICIÓN SEGUNDO CORTE: HERRAMIENTAS CASE (VISUAL PARADIGM) — CICLO MDD APLICADO A MUNDIPETS: GENERACIÓN DE CÓDIGO A PARTIR DE MODELOS UML}\\[4pt]
-	\vspace{1cm}
-
-	{\normalsize\bfseries MATERIA:}\\[4pt]
-	{\normalsize INGENIERÍA DE REQUISITOS}
-
-	\vspace{1cm}
-
-	{\normalsize\bfseries DOCENTE:}\\[4pt]
-	{\normalsize ING. GUERRERO ULLOA GLEISTON CICERÓN, PhD.}
-
-	\vspace{1cm}
-
-	{\normalsize\bfseries INTEGRANTES:}\\[6pt]
-
-	\textit{\textbf{FUERTES ARRAES EDSON DANIEL}},~CI: 0929115087,~Correo: efuertesa2@uteq.edu.ec\\
-
-	\vspace{0.5cm}
-
-	\textit{CEDEÑO AVILA WINSTON DAMIAN},~CI: 0942833492,~Correo: wcedenoa2@uteq.edu.ec\\
-
-	\vspace{0.5cm}
-
-	\textit{CEDEÑO CORONADO WILSON LIZANDRO},~CI: 1206867200,~Correo: wcedenoc2@uteq.edu.ec
-
-	\vspace{1cm}
-
-	{\normalsize\bfseries CURSO:}\\[4pt]
-	{\normalsize CUARTO SEMESTRE INGENIERÍA EN SOFTWARE \enquote{B}}
-
-	\vspace{1cm}
-
-	{\normalsize\bfseries Versión del documento:} 1.0 \quad\textbf{Repositorio GitHub:}\\
-	\url{https://github.com/MiloSaurio4kHD/PFC-MundiPets-MDD-EquipoG.git}
-
-	\vspace{0.5cm}
-
-	{\normalsize\bfseries QUEVEDO -- LOS RÍOS -- ECUADOR}\\[4pt]
-	{\normalsize\bfseries 2026 -- 2027 PPA}
-
-\end{titlepage}
-
-\tableofcontents
-\newpage
-\listoffigures
-\newpage
-\listoftables
-\newpage
-
-% ============================================================
-% 1. RESUMEN
-% ============================================================
-\section{Resumen}
-
-% ============================================================
-% 2. MARCO TEÓRICO
-% ============================================================
-\section{Marco teórico}
-
-% ============================================================
-% 3. JUSTIFICACIÓN DE LA HERRAMIENTA
-% ============================================================
-\section{Justificación de la herramienta MDD seleccionada}
-
-% ============================================================
-% 4. DESCRIPCIÓN DEL SUBSISTEMA MODELADO
-% ============================================================
-\section{Descripción del subsistema del PFC modelado}
-
-% ============================================================
-% 5. MODELO UML DE ORIGEN
-% ============================================================
-\section{Modelo UML de origen}
-
-\subsection{Diagrama de clases}\label{sec:diagrama_clases}
-
-\subsection{Diagramas complementarios (si aportan)}\label{sec:diagramas_complementarios}
-
-% ============================================================
-% 6. CONFIGURACIÓN DEL MECANISMO DE GENERACIÓN
-% ============================================================
-\section{Configuración del mecanismo de generación}
-
-% ============================================================
-% 7. PROCESO DE GENERACIÓN
-% ============================================================
-\section{Proceso de generación de código}
-
-% ============================================================
-% 8. VERIFICACIÓN DEL CÓDIGO GENERADO
-% ============================================================
-\section{Verificación del código generado}
-
-% ============================================================
-% 9. CIERRE DEL CICLO (ROUNDTRIP)
-% ============================================================
-\section{Cierre del ciclo (roundtrip) y trazabilidad}
-
-% ============================================================
-% 10. REPARTO DEL TRABAJO
-% ============================================================
-\section{Reparto del trabajo por integrante}
-
-% ============================================================
-% 11. CONCLUSIONES
-% ============================================================
-\section{Conclusiones}
-
-% ============================================================
-% REFERENCIAS
-% ============================================================
-\section{Referencias}
-
-\printbibliography[heading=none]
-
-\section*{Anexos}
-\addcontentsline{toc}{section}{Anexos}
-
-\section*{Estructura del repositorio GitHub}
-
-\begin{verbatim}
-PFC-MundiPets-MDD-EquipoG/
-  README.md
-  docs/
-    informe.tex
-    informe.pdf
-    referencias.bib
-    figuras/
-  modelo/
-    <proyecto_nativo>.vpp
-  perfiles/
-  plantillas/
-  generado/
-  evidencias/
-    capturas/
-    video-demo.mp4
-  exposicion/
-    diapositivas.pdf
-\end{verbatim}
-
-\section*{Anexos adicionales}
-
-\subsection*{Tabla de mapeo extensa (modelo \(\to\) código)}\label{sec:anexo_mapeo}
-
-\subsection*{Listados de código representativo (fragmentos)}\label{sec:anexo_codigo}
-
-\subsection*{Instrucciones detalladas de reproducibilidad}\label{sec:anexo_instrucciones}
-
+		\centering
+		
+		{\large\bfseries UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO\\[12pt]}
+		
+		\includegraphics[width=0.3\textwidth]{figuras/logo_uteq.png}\\[12pt]
+		
+		{\large\bfseries FACULTAD DE CIENCIAS DE LA COMPUTACIÓN Y DISEÑO DIGITAL\\[4pt]
+			CARRERA DE INGENIERÍA EN SOFTWARE}
+		
+		\vspace{0.5cm}
+		
+		{\normalsize\bfseries TEMA:}\\[4pt]
+		{\normalsize GA – EXPOSICIÓN SEGUNDO CORTE: HERRAMIENTAS CASE (VISUAL PARADIGM)}\\[4pt]
+		\vspace{0.5cm}
+		
+		
+		{\normalsize\bfseries MATERIA:}\\[4pt]
+		{\normalsize INGENIERÍA EN REQUERIMIENTOS}
+		
+		\vspace{1cm}
+		
+		{\normalsize\bfseries DOCENTE:}\\[4pt]
+		{\normalsize ING. GUERRERO ULLOA GLEISTON CICERÓN, PhD.}
+		
+		\vspace{0.5cm}
+		
+		{\normalsize\bfseries INTEGRANTES:}\\[6pt]
+		
+		\textit{\textbf{FUERTES ARRAES EDSON DANIEL}},~CI: 0929115087,~Correo: efuertesa2@uteq.edu.ec\\
+		{\small Rol: Líder e integrador -- Modelado UML y generación de código}\\
+		
+		\vspace{0.5cm}
+		
+		\textit{CEDEÑO AVILA WINSTON DAMIAN},~CI: 0942833492,~Correo: wcedenoa2@uteq.edu.ec\\
+		{\small Rol: Marco teórico, descripción del subsistema y conclusiones}\\
+		
+		\vspace{0.5cm}
+		
+		\textit{CEDEÑO CORONADO WILSON LIZANDRO},~CI: 1206867200,~Correo: wcedenoc2@uteq.edu.ec\\
+		{\small Rol: Justificación de la herramienta MDD}
+		
+		\vspace{0.3cm}
+		
+		{\normalsize\bfseries EQUIPO G}\\[4pt]
+		
+		\vspace{0.3cm}
+		
+		{\normalsize\bfseries CURSO:}\\[4pt]
+		{\normalsize CUARTO SEMESTRE INGENIERÍA EN SOFTWARE \enquote{B}}
+		
+		\vspace{1cm}
+		
+		{\normalsize\bfseries SISTEMA PROYECTO FIN DE CURSO:}\\[4pt]
+		{\normalsize MUNDIPETS (DANIEL FUERTES - TITULAR PFC))}\\[4pt]
+		\vspace{0.5cm}
+		
+		
+		\quad\textbf{Repositorio GitHub:}\\
+		\url{https://github.com/MiloSaurio4kHD/PFC-MundiPets-MDD-EquipoG.git}
+		
+		\vspace{0.5cm}
+		
+		{\normalsize\bfseries QUEVEDO -- LOS RÍOS -- ECUADOR}\\[4pt]
+		{\normalsize\bfseries 2026 -- 2027 PPA}
+		
+	\end{titlepage}
+	
+	\tableofcontents
+	\newpage
+	\listoffigures
+	\newpage
+	\listoftables
+	\newpage
+	% ============================================================
+	% 1. RESUMEN
+	% ============================================================
+	\section{Resumen}
+	
+	Este documento evidencia la aplicación del ciclo completo de desarrollo dirigido por modelos (MDD) sobre el Proyecto Fin de Curso MundiPets, una plataforma orientada a centralizar perfiles de mascotas y apoyar procesos de adopción y cruza responsable. El problema abordado parte de una limitación del proceso actual: la publicación de información incompleta y la falta de datos médicos verificables. Para demostrar el enfoque MDD se seleccionó Visual Paradigm como herramienta CASE, por su cobertura de múltiples lenguajes de salida, la posibilidad de editar sus plantillas de generación mediante Apache Velocity y su edición Community gratuita para uso educativo. El trabajo se delimitó al subsistema de gestión del perfil de mascota y validación de información médica, modelado como un diagrama de clases UML con entidades como Mascota, HistorialMedico, DocumentoVeterinario y CarnetVacunacion, sus asociaciones y operaciones. A partir de este modelo se ejecutó el motor Instant Generator para obtener código fuente, se verificó la correspondencia entre modelo y código, y se realizó un cambio controlado sobre el modelo para evidenciar el roundtrip. El resultado es una base de código estructural trazable, aprovechable como punto de partida para el desarrollo posterior del PFC.
+	
+	% ============================================================
+	% 2. MARCO TEÓRICO
+	% ============================================================
+	\section{Marco teórico}
+	
+	El desarrollo dirigido por modelos reúne un conjunto de enfoques de ingeniería de software en los que los modelos dejan de ser únicamente documentación y pasan a convertirse en artefactos centrales del proceso de construcción. La literatura reciente destaca que el valor práctico de estos enfoques aparece cuando los modelos se vinculan con mecanismos de validación, transformación y generación automática, de forma que sea posible conservar trazabilidad entre decisiones de diseño e implementación \cite{sebastian2020codegen, diruscio2022lowcode, david2023collaborative}. En el contexto de MundiPets, este principio permite partir de modelos UML del dominio y utilizarlos como entrada controlada para obtener una base de código reproducible.
+	
+	\subsection{Ingeniería dirigida por modelos (MDE)}
+	
+	Model-Driven Engineering (MDE) es el enfoque más amplio. Considera los modelos, metamodelos y transformaciones como elementos de primera clase durante distintas actividades del ciclo de vida. Su objetivo no se limita a generar código: también puede apoyar análisis, validación, consistencia, interoperabilidad, evolución y trazabilidad. En la práctica, la automatización es una característica clave, porque reduce la repetición de tareas mecánicas y permite trasladar información entre niveles de abstracción de manera sistemática \cite{diruscio2022lowcode, david2023collaborative, krouwel2024enterprise}.
+	
+	Aplicado a MundiPets, la MDE comprende la cadena completa que conecta los requisitos del sistema con sus modelos de análisis y diseño, el diagrama de clases construido en Visual Paradigm y los artefactos de implementación derivados. Por ejemplo, una entidad del dominio como \texttt{Mascota} puede mantenerse relacionada con atributos, asociaciones y operaciones modeladas, de modo que los cambios estructurales puedan rastrearse hasta el código que corresponda.
+	
+	\subsection{Model-Driven Architecture (MDA): CIM, PIM y PSM}
+	
+	Model-Driven Architecture (MDA) es una forma estructurada de aplicar principios dirigidos por modelos mediante la separación de niveles de abstracción. Estudios recientes sobre MDA mantienen la distinción entre Computation Independent Model (CIM), Platform Independent Model (PIM) y Platform Specific Model (PSM), y destacan que las transformaciones entre dichos niveles permiten reducir dependencias tempranas de la tecnología y automatizar parte del paso hacia la implementación \cite{silega2022cimpim, krouwel2024enterprise}.
+	
+	\begin{table}[H]
+		\caption{Niveles de abstracción de MDA aplicados a MundiPets.}
+		\label{tab:mda_niveles}
+		\centering
+		\begin{tabularx}{\linewidth}{|C{1.5cm}|X|X|}
+			\hline
+			\textbf{Nivel} & \textbf{Propósito} & \textbf{Aplicación a MundiPets} \\
+			\hline
+			\textbf{CIM} & Describe el problema, objetivos, procesos y necesidades del negocio sin decidir tecnología. & Necesidad de centralizar perfiles de mascotas, adopción/cruza responsable y validación de información sanitaria; requisitos y actores del SRS. \\
+			\hline
+			\textbf{PIM} & Describe estructura y comportamiento del software sin comprometerlo con una plataforma concreta. & Modelo UML del subsistema con clases como \texttt{Mascota}, \texttt{HistorialMedico}, \texttt{DocumentoVeterinario}, \texttt{CarnetVacunacion} y \texttt{ValidacionMedica}, con asociaciones y operaciones. \\
+			\hline
+			\textbf{PSM} & Añade decisiones tecnológicas necesarias para construir el sistema en una plataforma objetivo. & El mismo modelo enriquecido con convenciones del lenguaje, tipos concretos, paquetes, persistencia y estereotipos/anotaciones según la configuración definitiva del generador. \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	Para la demostración del equipo, el PIM debe conservar la lógica del dominio de MundiPets sin depender del lenguaje de salida. El PSM se obtiene cuando el modelo incorpora información específica para la generación. Esta separación es importante porque permite explicar con claridad qué información pertenece al problema y cuál fue introducida exclusivamente para materializar el código \cite{silega2022cimpim}.
+	
+	\subsection{Desarrollo dirigido por modelos (MDD)}
+	
+	Model-Driven Development (MDD) se concentra específicamente en utilizar modelos como principal insumo del desarrollo y en automatizar la obtención de artefactos ejecutables o cercanos a la implementación. En este sentido, puede entenderse como una aplicación orientada al desarrollo dentro del marco más amplio de MDE. La generación automática de código es uno de sus mecanismos más visibles y ha sido estudiada como medio para aumentar productividad, repetibilidad y trazabilidad, aunque su efectividad depende de la calidad del modelo y del generador utilizado \cite{sebastian2020codegen, krouwel2024enterprise}.
+	
+	En MundiPets, la demostración MDD no pretende generar la plataforma completa. El propósito es evidenciar un ciclo controlado sobre un subsistema representativo: modelar sus clases en Visual Paradigm, aplicar la configuración de generación, obtener código, verificar la correspondencia modelo--código y ejecutar un cambio que demuestre el roundtrip.
+	
+	\subsection{Transformaciones M2M y M2T}
+	
+	Las transformaciones Model-to-Model (M2M) convierten un modelo origen en otro modelo destino. Dentro del ecosistema OMG, QVT (Query/View/Transformation) constituye la familia de lenguajes de referencia para expresar transformaciones entre modelos conformes a metamodelos. Conceptualmente, una transformación M2M puede utilizarse para refinar un PIM hacia un PSM, incorporando información tecnológica que no estaba presente en el modelo independiente de plataforma \cite{silega2022cimpim}.
+	
+	Las transformaciones Model-to-Text (M2T) producen artefactos textuales a partir de un modelo. El caso típico es la generación de código fuente, aunque también pueden generarse archivos de configuración o documentación. MOFM2T representa la especificación OMG para este tipo de transformación basada en plantillas. Investigaciones recientes sobre M2T muestran que las plantillas combinan texto fijo con expresiones que consultan el modelo, y que la regeneración requiere mecanismos para evitar la pérdida de código escrito manualmente, como regiones protegidas o estrategias de sincronización \cite{almutairi2022roundtrip}.
+	
+	\begin{table}[H]
+		\caption{Comparación entre transformaciones M2M y M2T.}
+		\label{tab:m2m_m2t}
+		\centering
+		\begin{tabularx}{\linewidth}{|C{1.2cm}|L{2.6cm}|L{2.6cm}|X|}
+			\hline
+			\textbf{Tipo} & \textbf{Entrada} & \textbf{Salida} & \textbf{Ejemplo en MundiPets} \\
+			\hline
+			\textbf{M2M} & Modelo UML/PIM & Modelo refinado/PSM & Agregar detalles tecnológicos, mapeos de persistencia o convenciones necesarias para el generador. \\
+			\hline
+			\textbf{M2T} & Modelo/PSM & Código o texto & Generar clases, atributos, métodos y otros archivos del proyecto a partir del modelo configurado en Visual Paradigm. \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\subsection{Metamodelos, perfiles UML, estereotipos y plantillas}
+	
+	Un metamodelo define los conceptos válidos de un lenguaje de modelado y las relaciones que pueden existir entre ellos; por ello, un modelo UML debe ajustarse a las reglas de su metamodelo. Sobre esta base, los perfiles UML permiten especializar el lenguaje sin crear una notación completamente nueva. Un perfil puede introducir estereotipos, valores etiquetados y restricciones para expresar información adicional que será interpretada por herramientas o generadores.
+	
+	En una demostración de MundiPets pueden emplearse, cuando la configuración elegida lo requiera, estereotipos como \enquote{Entity}, \enquote{Service} o \enquote{Controller} para diferenciar responsabilidades. Estos estereotipos no deben añadirse como decoración: su utilidad radica en que exista una regla explícita de mapeo hacia el código generado. De manera similar, las plantillas de generación establecen cómo cada elemento del modelo se convierte en texto. La automatización es reproducible únicamente cuando modelo, reglas y plantillas se versionan de forma conjunta \cite{sebastian2020codegen, diruscio2022lowcode, david2023collaborative}.
+	
+	\subsection{Forward, reverse y round-trip engineering}
+	
+	Forward engineering es el proceso de derivar código u otros artefactos de implementación a partir del modelo. Reverse engineering realiza el recorrido inverso: analiza una implementación existente para reconstruir o actualizar una representación de diseño. Round-trip engineering busca mantener sincronizados ambos lados cuando existen cambios sucesivos. Este último escenario es el más exigente porque una regeneración puede sobrescribir modificaciones manuales si la herramienta no dispone de una política clara de fusión o protección \cite{almutairi2022roundtrip}.
+	
+	Para la evidencia de MundiPets, el ciclo mínimo debe mostrar: modelo inicial \(\to\) generación de código \(\to\) verificación \(\to\) cambio no trivial en el modelo \(\to\) regeneración \(\to\) comprobación del cambio. La trazabilidad entre clases, atributos, operaciones y archivos generados permite demostrar que el resultado no es una copia manual, sino una transformación repetible y verificable.
+	
+	% ============================================================
+	% 3. JUSTIFICACIÓN DE LA HERRAMIENTA
+	% ============================================================
+	\section{Justificación de la herramienta MDD seleccionada}
+	
+	\subsection{Criterios de selección}
+	
+	Para representar el ciclo de desarrollo dirigido por modelos en el subsistema de MundiPets, el equipo optó por trabajar con Visual Paradigm como herramienta CASE. La decisión no fue arbitraria: se basó en tres puntos concretos, qué tantos lenguajes de programación cubre su generador, si se pueden ajustar las plantillas con las que produce el código, y cuánto cuesta adoptarla frente a otras opciones parecidas que también sirven para un trabajo de este nivel.
+	
+	Lo primero, la variedad de lenguajes que el generador soporta, terminó pesando bastante porque, para cuando tocaba preparar la exposición, todavía no se había cerrado del todo qué tecnología se usaría en la implementación final del PFC. Trabajar con una herramienta que admite varios lenguajes de salida evita rehacer el modelado si, ya avanzado el proyecto, el equipo termina programando en algo distinto a lo mostrado durante la demo. Ningún CASE tool es el único con esta ventaja, pero entre las opciones que se revisaron, Visual Paradigm fue de las que más lenguajes ofrecía sin necesidad de pagar licencias adicionales.
+	
+	El segundo punto, poder editar las plantillas de generación, importaba porque la idea no era simplemente sacar clases vacías del diagrama, sino un código que ya se pareciera, al menos un poco, a cómo el grupo suele escribir sus proyectos. Con un generador cerrado, casi toda la salida termina reescribiéndose a mano para que encaje con el estilo que se busca, y ahí se pierde buena parte del sentido de automatizar nada. Visual Paradigm deja tocar la plantilla directamente, así que ese trabajo de ajuste se hace una sola vez y sirve para todas las generaciones que vengan después.
+	
+	El último criterio, el costo, tenía que ver con que este es un proyecto de curso y nadie del equipo va a pagar una licencia comercial. Por eso se prefirieron herramientas con versión gratuita o barata que alcanzara para modelar en UML y generar el código que se necesita para la demo, sin quedar atados a una prueba temporal que se venza justo antes de la fecha de exposición. En ese sentido, Visual Paradigm cumple con este criterio porque ofrece una edición Community gratuita para usos no comerciales, entre ellos proyectos educativos y personales \cite{vp_community}.
+	
+	Antes de quedarse comparando solo Visual Paradigm contra Enterprise Architect, el equipo también le echó un ojo, de forma más rápida, a StarUML y a ArgoUML. Ninguna de las dos pasó el primer filtro: StarUML porque su generación de código cubre menos lenguajes de los que se necesitaban, y ArgoUML porque el proyecto parece tener poco movimiento reciente, lo que no da mucha confianza para depender de él en una entrega. Con eso quedaron solo dos candidatas serias, Visual Paradigm y Enterprise Architect, las únicas con un módulo de generación completo como para sostener la demostración.
+	
+	Los tres criterios, eso sí, no pesaron igual. La cobertura de lenguajes y el costo funcionaron casi como filtros de entrada, cosas que cualquier herramienta tenía que cumplir para seguir en la carrera, mientras que poder personalizar las plantillas terminó siendo el que desempató entre las dos que sí pasaban los primeros dos filtros. Y ahí es donde Visual Paradigm le ganó a Enterprise Architect: ambas cumplían razonablemente bien lo primero, pero se notaba más diferencia en el tercer punto.
+	
+	\subsection{El motor Instant Generator}
+	
+	Dentro de Visual Paradigm existe un módulo llamado Instant Generator que se encarga de convertir un diagrama de clases UML en código. Puede generar, entre otros, Java, C\#, C++, Python, PHP, VB.NET y plantillas pensadas para Hibernate, y también hace el camino contrario: reconstruir el modelo UML a partir de código que ya existe \cite{vp_instantgen}. Esa cobertura amplia le sirve a MundiPets porque el subsistema modelado se puede generar en el lenguaje que finalmente se defina para el PFC sin tener que cambiar de herramienta más adelante.
+	
+	Otra cosa que pesó en la elección es que Instant Generator no depende de un motor cerrado para producir el código: sus plantillas están hechas sobre Apache Velocity, que es un motor de plantillas abierto y editable \cite{vp_userguide}. Apache Velocity, de hecho, es un proyecto independiente de código abierto de la Apache Software Foundation, lo que explica por qué sus plantillas pueden modificarse libremente en vez de quedar cerradas dentro del generador \cite{apache_velocity}. Gracias a eso se puede ajustar cómo quedan formateadas las clases generadas, dónde van las llaves o si se agregan comentarios de cabecera, algo que sirve si el equipo necesita que el código generado siga alguna convención particular del PFC.
+	
+	En la práctica, para generar código hace falta tener listo el diagrama de clases dentro de Visual Paradigm. Desde ahí se va a Tools \textgreater{} Code \textgreater{} Instant Generator, se elige el lenguaje de salida, se indica dónde debe quedar el código y se marcan las clases del subsistema que se quiere traducir. El motor recorre cada clase y convierte los atributos en campos o propiedades según el lenguaje elegido, las operaciones en métodos vacíos que el equipo tiene que completar después, y las relaciones (asociación, agregación, composición, herencia) en su equivalente dentro del lenguaje, por ejemplo, colecciones cuando la multiplicidad es uno a muchos, o clases hijas cuando hay generalización.
+	
+	Como las plantillas están sobre Velocity, cada parte del archivo generado (encabezado, declaración de la clase, getters y setters, comentarios) es un fragmento independiente que se puede modificar sin tocar el resto del generador. Eso quiere decir que si el equipo quiere, por ejemplo, que cada clase salga con un comentario indicando quién es el responsable, o con alguna anotación de persistencia en los atributos, ese cambio se hace una vez en la plantilla y queda aplicado para todas las generaciones futuras, sin repetirlo clase por clase.
+	
+	El módulo también funciona al revés: puede tomar código ya escrito y reconstruir el diagrama de clases correspondiente. Esa función no se va a usar en la demo de MundiPets, pero se tuvo presente al elegir la herramienta como una opción de respaldo, por si en una etapa posterior del PFC hace falta documentar en UML algo que ya se empezó a programar directamente.
+	
+	Para dar un ejemplo concreto del subsistema, la clase \texttt{HistorialMedico}, con atributos como la fecha de creación, las observaciones generales y la referencia a la \texttt{Mascota}, quedaría generada con esos mismos campos ya declarados según la sintaxis del lenguaje elegido, más sus métodos de acceso hechos automáticamente. La relación uno a uno con \texttt{Mascota} aparecería como una simple referencia a un objeto \texttt{Mascota} dentro de la clase generada, y una operación que el equipo haya puesto en el diagrama, como registrar una nueva entrada en el historial, saldría como un método sin cuerpo, listo para que se le agregue la lógica durante el desarrollo del PFC.
+	
+	También se revisó cómo queda organizada la salida. El generador crea un archivo por clase y respeta la estructura de paquetes o espacios de nombres definida en el propio modelo; si el equipo agrupó las clases del subsistema bajo un paquete, digamos, gestión de perfil médico, esa agrupación se refleja igual en la carpeta generada, en vez de tirar todos los archivos sueltos en un mismo lugar. Esto evita tener que reordenar manualmente los archivos antes de meterlos al proyecto del PFC.
+	
+	\subsection{Comparación con una alternativa descartada: Enterprise Architect}
+	
+	Como alternativa se revisó Enterprise Architect, de Sparx Systems, una herramienta CASE bastante usada para modelado empresarial y arquitectura de sistemas. También soporta generación e ingeniería inversa de código, y tiene buena fama en el modelado de arquitecturas complejas y proyectos grandes.
+	
+	Aun así, se descartó por dos razones principales. La primera es que su curva de aprendizaje es más pronunciada que la de Visual Paradigm, porque está pensada para arquitectos empresariales con flujos de trabajo más largos, algo que no calza con el tiempo disponible para una exposición de corte parcial. La segunda es que configurar la generación de código en Enterprise Architect no resulta tan intuitivo para alguien que recién empieza, mientras que en Visual Paradigm todo el flujo (Tools \textgreater{} Code \textgreater{} Instant Generator) permite elegir lenguaje, ruta de salida y clases desde una sola ventana, lo que hace más simple la demostración en vivo prevista para el cierre.
+	
+	Más allá de la curva de aprendizaje y la configuración, también se comparó la documentación disponible para quien recién usa la herramienta. Visual Paradigm tiene guías paso a paso específicas para Instant Generator, con capturas del proceso completo, lo cual ahorró tiempo al equipo durante la preparación. La de Enterprise Architect, en cambio, viene mezclada con la documentación de otras funciones de arquitectura empresarial, así que encontrar justo la parte de generación de código tomó más tiempo de búsqueda.
+	
+	Otro punto fue el licenciamiento. Enterprise Architect ofrece una prueba de treinta días para quien no tiene licencia, después de la cual hay que comprar alguna de sus ediciones pagas \cite{sparx_eatrial}, lo que trae el riesgo de que la prueba se venza antes de la exposición si no se coordinan bien los tiempos. Visual Paradigm, en cambio, tiene una edición gratuita para modelado UML básico, que alcanza para modelar el subsistema de MundiPets y completar el ciclo de generación sin depender de una fecha de vencimiento.
+	
+	Con todo esto, el equipo decidió que, aunque Enterprise Architect es una herramienta sólida para proyectos más grandes, Visual Paradigm se ajusta mejor al alcance y al tiempo que hay para esta exposición en particular, sin que eso signifique descartarla para etapas más adelante del PFC donde el modelo sea más complejo.
+	
+	También se revisó qué tan fácil es exportar el diagrama como apoyo para el informe escrito del PFC, aparte del código generado. Visual Paradigm permite exportar los diagramas en formatos de imagen comunes y generar un documento de especificación a partir del modelo, lo que ayuda a mantener coherencia entre lo que se muestra en la exposición y lo que se entrega por escrito. Enterprise Architect tiene algo similar, pero pensado para reportes más largos y con más configuración de la que hace falta para una entrega de corte parcial, así que en este caso se vio como una ventaja menor frente al flujo más directo de Visual Paradigm.
+	
+	\subsection{Aplicación a MundiPets}
+	
+	El equipo limitó la demostración al subsistema de gestión del perfil de mascota y validación de información médica, con entidades como \texttt{Mascota}, \texttt{HistorialMedico}, \texttt{DocumentoVeterinario}, \texttt{CarnetVacunacion}, \texttt{Vacuna}, \texttt{ValidacionMedica} y \texttt{AntecedenteGenetico}. La elección de Visual Paradigm tiene sentido justo con este subsistema porque, al correr Instant Generator sobre su diagrama de clases, se puede mostrar de forma directa cómo cada clase, atributo y operación del modelo termina en código ejecutable, sin escribir el esqueleto de las clases a mano. Esto se ve especialmente bien en relaciones como \texttt{Mascota}--\texttt{HistorialMedico} (uno a uno) o \texttt{Mascota}--\texttt{DocumentoVeterinario} (uno a muchos), donde la manera en que Instant Generator traduce esa cardinalidad es, en sí, parte de lo que se busca mostrar.
+	
+	La demostración en vivo va a seguir una secuencia corta: primero se muestra el diagrama de clases completo del subsistema en Visual Paradigm, señalando los atributos y operaciones de cada entidad; después se corre Instant Generator sobre ese diagrama, escogiendo el lenguaje y la ruta de salida delante del público; y al final se abre el código generado para mostrar, clase por clase, cómo quedaron los atributos, las operaciones y las relaciones del modelo. La idea de esta secuencia es que la audiencia vaya conectando cada parte del diagrama con su equivalente en el código, en vez de ver el código generado como algo aislado.
+	
+	En concreto, la relación \texttt{Mascota}--\texttt{HistorialMedico}, que es uno a uno, sirve para mostrar cómo Instant Generator convierte esa cardinalidad en una referencia directa entre las clases generadas, mientras que \texttt{Mascota}--\texttt{DocumentoVeterinario}, que es uno a muchos, termina como una colección dentro de la clase \texttt{Mascota}. Poner ambos casos en la misma demo ayuda a que se note que el motor no genera lo mismo para toda asociación, sino que adapta la estructura según la multiplicidad que tenga cada relación en el modelo. Esa misma lógica se aplicaría después a \texttt{CarnetVacunacion} con \texttt{Vacuna} y a \texttt{ValidacionMedica} con \texttt{AntecedenteGenetico}, aunque estas dos quedan fuera del recorrido principal que se va a mostrar en el cierre.
+	
+	Sobre \texttt{ValidacionMedica} puntualmente, se decidió no meterla en el recorrido principal porque buena parte de lo que hace esta clase tiene que ver con reglas de negocio, por ejemplo, revisar que un carnet de vacunación corresponda a vacunas puestas dentro del rango de edad esperado según la especie de la mascota, y ese tipo de validación no se ve reflejada en el diagrama de clases como tal, sino que se programa después de generar el código, dentro de los métodos que Instant Generator deja vacíos. Comentar esto durante la exposición ayuda a que quede claro qué resuelve la generación automática y qué sigue dependiendo de que el equipo programe manualmente.
+	
+	Para la parte en vivo, se repartieron roles concretos: una persona va a manejar el teclado y ejecutar los pasos dentro de Visual Paradigm, y otra va a ir narrando en paralelo qué hace cada paso y por qué se relaciona con lo explicado antes. Esto es para que quien maneja la herramienta no tenga que parar a explicar cada clic, algo que suele alargar de más este tipo de demostraciones.
+	
+	% ============================================================
+	% 4. DESCRIPCIÓN DEL SUBSISTEMA MODELADO
+	% ============================================================
+	\section{Descripción del subsistema del PFC modelado}
+	
+	\subsection{Subsistema seleccionado: gestión del perfil de mascota y validación de información médica}
+	
+	Para la demostración del ciclo MDD se propone delimitar el trabajo al subsistema de gestión del perfil de mascota y validación de información médica. La elección es coherente con el alcance de MundiPets, plataforma orientada a centralizar perfiles de mascotas y apoyar procesos de adopción y cruza responsable. La documentación previa del PFC del equipo (entrega parcial del ERS/SRS de MundiPets) identifica como problemas del proceso actual la publicación de información incompleta y la falta de datos médicos verificables, por lo que este subsistema concentra información estructural, relaciones entre entidades y operaciones que resultan adecuadas para una demostración de generación de código.
+	
+	El subsistema es representativo porque combina operaciones de registro, actualización, consulta y validación; además, contiene asociaciones uno-a-uno y uno-a-muchos que permiten observar cómo Visual Paradigm traslada estructuras UML a construcciones del lenguaje objetivo. No se pretende modelar toda la red social, sino aislar una unidad coherente que pueda ser generada, compilada y modificada durante la demostración.
+	
+	\subsection{Actores involucrados}
+	
+	\begin{table}[H]
+		\caption{Actores del subsistema de perfil de mascota y validación médica.}
+		\label{tab:actores}
+		\centering
+		\begin{tabularx}{\linewidth}{|L{3.2cm}|L{3cm}|X|}
+			\hline
+			\textbf{Actor} & \textbf{Participación en el subsistema} & \textbf{Responsabilidad principal} \\
+			\hline
+			\textbf{Propietario de mascota} & Actor principal de gestión & Registra la mascota, mantiene sus datos e incorpora antecedentes o documentos permitidos. \\
+			\hline
+			\textbf{Refugio} & Gestor alternativo del perfil & Puede registrar y mantener perfiles de mascotas bajo su cuidado cuando corresponda al proceso de adopción. \\
+			\hline
+			\textbf{Veterinaria / profesional autorizado} & Actor de validación & Revisa información y documentación sanitaria y registra el estado de validación. \\
+			\hline
+			\textbf{Adoptante o interesado en cruza} & Actor de consulta & Consulta la información autorizada del perfil antes de tomar decisiones dentro de un proceso. \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\subsection{Requisitos funcionales relevantes}
+	
+	La delimitación se apoya en los requisitos ya documentados y refinados en el ERS/SRS del equipo y en la práctica de modelado UML previa del PFC. Para evitar ampliar innecesariamente el alcance, se consideran como núcleo los siguientes requisitos:
+	
+	\begin{table}[H]
+		\caption{Requisitos funcionales núcleo del subsistema.}
+		\label{tab:rf_nucleo}
+		\centering
+		\begin{tabularx}{\linewidth}{|C{2cm}|L{4cm}|X|}
+			\hline
+			\textbf{ID} & \textbf{Requisito} & \textbf{Relación con el subsistema} \\
+			\hline
+			\textbf{RF-01} & Registrar mascota & Crea la entidad principal y sus datos generales. \\
+			\hline
+			\textbf{RF-02a / RF-02b} & Registrar y actualizar historial médico & Mantiene antecedentes clínicos vinculados con la mascota. \\
+			\hline
+			\textbf{RF-03} & Consultar perfil completo de una mascota & Recupera la información autorizada del perfil y sus relaciones. \\
+			\hline
+			\textbf{RF-09} & Validar la información médica de una mascota & Introduce el proceso de revisión por un actor veterinario autorizado. \\
+			\hline
+			\textbf{RF-14} & Gestionar carnet de vacunación & Modela información sanitaria estructurada y su relación con vacunas y controles. \\
+			\hline
+			\textbf{RF-16} & Gestionar antecedentes genéticos y parentesco & Añade antecedentes útiles para procesos responsables de cruza. \\
+			\hline
+			\textbf{RF-11} & Administrar la privacidad de la información & Se considera requisito transversal para controlar qué datos médicos pueden ser consultados. \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	La práctica experimental de modelado UML del equipo relaciona estos requisitos con clases del dominio como \texttt{Mascota}, \texttt{HistorialMedico}, \texttt{DocumentoVeterinario}, \texttt{CarnetVacunacion} y otras entidades asociadas, confirmando que el subsistema dispone de suficiente riqueza estructural para construir un diagrama de clases de seis o más clases sin incorporar elementos ajenos al objetivo de la demostración.
+	
+	\subsection{Alcance incluido y alcance excluido}
+	
+	\begin{table}[H]
+		\caption{Delimitación del alcance de la demostración.}
+		\label{tab:alcance}
+		\centering
+		\begin{tabularx}{\linewidth}{|X|X|}
+			\hline
+			\textbf{Incluido en el subsistema} & \textbf{Fuera del alcance de esta demostración} \\
+			\hline
+			Registro y actualización de los datos esenciales de la mascota. & Gestión completa de solicitudes de adopción. \\
+			\hline
+			Asociación del perfil con historial médico y documentos veterinarios. & Gestión completa de solicitudes de cruza. \\
+			\hline
+			Carnet de vacunación y elementos sanitarios relacionados. & Mensajería y conversaciones entre usuarios. \\
+			\hline
+			Validación de información/documentación médica. & Motor de inteligencia artificial y algoritmos de compatibilidad. \\
+			\hline
+			Antecedentes genéticos y reglas básicas de visibilidad del perfil. & Moderación global, reportes y administración integral de la red social. \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\subsection{Clases de dominio candidatas para el modelo de origen}
+	
+	Sin sustituir la responsabilidad del Integrante 1 sobre el diagrama definitivo, la documentación previa permite proponer como conjunto coherente de clases para este subsistema: \texttt{Mascota}, \texttt{Propietario/Usuario}, \texttt{HistorialMedico}, \texttt{DocumentoVeterinario}, \texttt{CarnetVacunacion}, \texttt{Vacuna}, \texttt{ValidacionMedica} y \texttt{AntecedenteGenetico}. Este conjunto supera el mínimo de seis clases exigido por la guía y permite representar cardinalidades, colecciones y operaciones con firmas completas. La denominación final debe coincidir exactamente con el archivo \texttt{.vpp} y con el código que se genere.
+	
+	\subsection{Representatividad para la demostración MDD}
+	
+	El subsistema seleccionado ofrece una demostración clara del enfoque MDD porque la entidad \texttt{Mascota} funciona como núcleo y se relaciona con objetos que poseen ciclos y responsabilidades distintas. Un cambio como agregar un atributo al perfil, una operación al historial o una relación con una entidad sanitaria puede observarse primero en UML y luego en el código regenerado. Esto facilita construir la tabla de correspondencia modelo \(\to\) código y mostrar trazabilidad.
+	
+	Además, la separación del subsistema evita que la exposición se convierta en una revisión general de MundiPets. El objetivo de la demostración debe permanecer en Visual Paradigm y en el recorrido modelo \(\to\) generación \(\to\) verificación \(\to\) roundtrip, utilizando el dominio de MundiPets únicamente como caso real sobre el cual se evidencia el funcionamiento de la herramienta.
+	
+	% ============================================================
+	% 5. MODELO UML DE ORIGEN
+	% ============================================================
+	\section{Modelo UML de origen}
+	
+	El modelo UML de origen del subsistema se construyó íntegramente en Visual Paradigm y se conserva en el archivo nativo \texttt{MundiPets-DiagramaClases.vpp}, ubicado en la carpeta \texttt{modelo/} del repositorio. A partir de este modelo se ejecutó posteriormente la generación de código descrita en las secciones siguientes.
+	
+	\subsection{Diagrama de clases}\label{sec:diagrama_clases}
+	
+	El diagrama de clases constituye el artefacto estructural de origen sobre el cual opera el generador. Modela el subsistema de gestión del perfil de mascota y validación médica con ocho clases del dominio y dos enumeraciones, superando el mínimo de seis clases exigido. La Figura~\ref{fig:diagrama_clases} presenta el diagrama completo.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{figuras/MundiPets-DiagramaClases.png}
+		\caption{Diagrama de clases del subsistema en Visual Paradigm.}
+		\label{fig:diagrama_clases}
+	\end{figure}
+	
+	Cada clase se especificó con atributos tipados y visibilidad privada, y operaciones con firma completa y visibilidad pública, siguiendo las convenciones de encapsulamiento. Los tipos de datos se declararon en notación C\# (\texttt{string}, \texttt{int}, \texttt{bool}, \texttt{char}, \texttt{DateTime}) para mantener la coherencia con el lenguaje objetivo de la generación. Las relaciones del modelo cubren la variedad estructural requerida:
+	
+	\begin{itemize}[leftmargin=*, itemsep=2pt]
+		\item \textbf{Composición:} \texttt{Mascota} es el todo que contiene su \texttt{HistorialMedico} (1 a 1), sus \texttt{DocumentoVeterinario} (1 a 0..*) y su \texttt{CarnetVacunacion} (1 a 1); a su vez \texttt{CarnetVacunacion} contiene \texttt{Vacuna} (1 a 1..*). Estas partes no tienen existencia independiente de su contenedor.
+		\item \textbf{Agregación:} \texttt{Mascota} agrega \texttt{AntecedenteGenetico} (1 a 0..*), relación más débil en la que el antecedente puede considerarse de forma independiente.
+		\item \textbf{Asociación:} \texttt{Usuario} gestiona \texttt{Mascota} (1 a 0..*) y \texttt{ValidacionMedica} vincula a \texttt{Mascota} con el \texttt{Usuario} revisor.
+		\item \textbf{Dependencia:} \texttt{Usuario} y \texttt{ValidacionMedica} dependen de las enumeraciones \texttt{TipoUsuario} y \texttt{EstadoValidacion} respectivamente.
+	\end{itemize}
+	
+	El modelo fue verificado con las herramientas de validación de Visual Paradigm, sin errores de sintaxis ni de consistencia que comprometieran la generación.
+	
+	\subsection{Perfiles y estereotipos aplicados}\label{sec:perfiles_estereotipos}
+	
+	Para dirigir el generador se definió un perfil UML propio dentro del proyecto de Visual Paradigm, conservado en \texttt{modelo/perfiles/MundiPets-DiagramaPerfil.vpp}. El perfil declara los estereotipos \guillemotleft Entity\guillemotright, \guillemotleft Service\guillemotright{} y \guillemotleft Controller\guillemotright, cada uno extendiendo la metaclase \texttt{Class} del metamodelo UML mediante una relación de extensión; esta extensión establece que los estereotipos solo pueden aplicarse a elementos de tipo clase. La Figura~\ref{fig:perfil} muestra el diagrama de perfil.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\linewidth]{figuras/MundiPets.DiagramaPerfil.png}
+		\caption{Diagrama de perfil UML con los estereotipos definidos.}
+		\label{fig:perfil}
+	\end{figure}
+	
+	Además de los estereotipos, el perfil incorpora valores etiquetados (\emph{tagged values}) que ilustran cómo un perfil transporta metadatos que UML puro no puede expresar; por ejemplo, al estereotipo \guillemotleft Entity\guillemotright{} se le definieron los tags \texttt{tableName} y \texttt{persistente}, que un generador podría leer para producir anotaciones de persistencia.
+	
+	En el subsistema modelado se aplicó el estereotipo \guillemotleft Entity\guillemotright{} sobre las ocho clases del dominio, indicando que todas son entidades de datos. Los estereotipos \guillemotleft Service\guillemotright{} y \guillemotleft Controller\guillemotright{} se definieron en el perfil como parte de una arquitectura en capas prevista para fases posteriores del PFC (lógica de negocio y controladores), pero no se aplican en este diagrama porque su alcance se limita a la capa de dominio. Esta decisión es intencional y evita introducir estereotipos sin correspondencia real en el modelo.
+	
+	% ============================================================
+	% 6. CONFIGURACIÓN DEL MECANISMO DE GENERACIÓN
+	% ============================================================
+	\section{Configuración del mecanismo de generación}
+	
+	El mecanismo de generación empleado es el \emph{Instant Generator} de Visual Paradigm~17.3, el motor de transformación modelo-a-texto integrado en la herramienta. Instant Generator opera sobre plantillas Apache Velocity (archivos \texttt{.vm}), lo que permite inspeccionar y, de ser necesario, ajustar las reglas con que cada elemento del modelo se convierte en código. Para esta demostración se emplearon las plantillas estándar del lenguaje objetivo, sin personalización, conservadas en la carpeta \texttt{plantillas/} del repositorio junto con la captura de la configuración utilizada.
+	
+	\begin{table}[H]
+		\caption{Parámetros de configuración del Instant Generator.}
+		\label{tab:config_generador}
+		\centering
+		\begin{tabularx}{\linewidth}{|L{5cm}|X|}
+			\hline
+			\textbf{Parámetro} & \textbf{Valor aplicado} \\
+			\hline
+			Generador & Instant Generator (Visual Paradigm 17.3) \\
+			\hline
+			Lenguaje objetivo & C\# \\
+			\hline
+			Directorio de plantillas & \texttt{resources/instantgenerator/csharp} (Apache Velocity) \\
+			\hline
+			Directorio de salida & \texttt{generado/} del repositorio \\
+			\hline
+			Convención de nombres & Microsoft naming convention (métodos y propiedades en \emph{PascalCase}) \\
+			\hline
+			Propiedades & Auto-Implemented Properties activadas \\
+			\hline
+			Política ante regeneración & Sobrescritura con confirmación (\emph{Prompt to confirm overwrite file}) \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	La configuración concreta aplicada en la ventana del generador se muestra en la Figura~\ref{fig:config_generador}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figuras/ConfiguracionInstantGeneratorMundiPets.png}
+		\caption{Configuración del Instant Generator en Visual Paradigm.}
+		\label{fig:config_generador}
+	\end{figure}
+	
+	\paragraph{Decisiones de mapeo.} A partir de la inspección de las plantillas y del código resultante se identificaron las siguientes reglas de transformación del modelo al lenguaje C\#:
+	
+	\begin{itemize}[leftmargin=*, itemsep=2pt]
+		\item Cada \textbf{clase} UML produce un archivo \texttt{.cs} independiente con el mismo nombre y la sentencia \texttt{using System;}.
+		\item Cada \textbf{atributo} privado se traduce en un campo privado con su tipo C\# equivalente; los tipos \texttt{string}, \texttt{int}, \texttt{bool}, \texttt{char} y \texttt{DateTime} se trasladan directamente.
+		\item Cada \textbf{operación} se traduce en un método público con su firma completa, cuyo cuerpo se genera como \texttt{throw new NotImplementedException()} a la espera de la lógica del desarrollador.
+		\item Los nombres de métodos y propiedades se ajustan a \emph{PascalCase} por la convención de Microsoft (p.\,ej. \texttt{registrarMascota} $\to$ \texttt{RegistrarMascota}).
+		\item Cada \textbf{asociación} genera un campo del tipo de la clase relacionada, tomando como nombre la etiqueta del rol definida en el diagrama; cuando la multiplicidad es de muchos, el campo se genera como \textbf{arreglo} de ese tipo (\texttt{Tipo[]}).
+		\item Cada \textbf{enumeración} produce un archivo \texttt{.cs} con la declaración \texttt{enum} y sus literales.
+	\end{itemize}
+	
+	% ============================================================
+	% 7. PROCESO DE GENERACIÓN
+	% ============================================================
+	\section{Proceso de generación de código}
+	
+	La generación se ejecutó desde el menú \texttt{Tools $\to$ Code $\to$ Instant Generator}, seleccionando el lenguaje C\#, marcando las ocho clases y las dos enumeraciones del diagrama, y estableciendo como directorio de salida la carpeta \texttt{generado/} del repositorio. Antes de escribir los archivos se utilizó la función \emph{Preview} para verificar el resultado, y a continuación se ejecutó \emph{Generate}.
+	
+	El proceso produjo un archivo \texttt{.cs} por cada elemento del modelo, sin errores de generación. El árbol de proyecto resultante quedó conformado por los archivos: \texttt{Usuario.cs}, \texttt{Mascota.cs}, \texttt{HistorialMedico.cs}, \texttt{DocumentoVeterinario.cs}, \texttt{CarnetVacunacion.cs}, \texttt{Vacuna.cs}, \texttt{ValidacionMedica.cs}, \texttt{AntecedenteGenetico.cs}, \texttt{TipoUsuario.cs} y \texttt{EstadoValidacion.cs}. Las capturas de la invocación, del registro de salida y del árbol de archivos generado se conservan en \texttt{evidencias/capturas/}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{figuras/ProcesoGeneracion.png}
+		\caption{Ejecución del Instant Generator y árbol de archivos generado.}
+		\label{fig:proceso_generacion}
+	\end{figure}
+	
+	% ============================================================
+	% 8. VERIFICACIÓN DEL CÓDIGO GENERADO
+	% ============================================================
+	\section{Verificación del código generado}
+	
+	El código generado se abrió en el entorno de desarrollo de C\# para verificar su estructura y su correspondencia con el modelo de origen. Cada clase del diagrama se materializó en una clase C\# con sus campos y métodos, y cada enumeración en su declaración \texttt{enum}, lo que confirma la fidelidad estructural respecto del modelo.
+	
+	La Tabla~\ref{tab:correspondencia} resume la correspondencia entre los elementos del modelo y los artefactos generados, tomando la clase \texttt{Mascota} como caso representativo.
+	
+	\begin{table}[H]
+		\caption{Correspondencia modelo $\to$ código (clase \texttt{Mascota}).}
+		\label{tab:correspondencia}
+		\centering
+		\begin{tabularx}{\linewidth}{|L{4.2cm}|X|}
+			\hline
+			\textbf{Elemento del modelo UML} & \textbf{Artefacto generado en C\#} \\
+			\hline
+			Clase \texttt{Mascota} \guillemotleft Entity\guillemotright & Archivo \texttt{Mascota.cs} con \texttt{public class Mascota} \\
+			\hline
+			Atributo \texttt{-idMascota : int} & Campo \texttt{private int idMascota;} \\
+			\hline
+			Atributo \texttt{-fechaNacimiento : DateTime} & Campo \texttt{private DateTime fechaNacimiento;} \\
+			\hline
+			Operación \texttt{+registrarMascota(datos : MascotaDTO) : bool} & Método \texttt{public bool RegistrarMascota(MascotaDTO datos)} \\
+			\hline
+			Composición con \texttt{HistorialMedico} (1) & Campo \texttt{private HistorialMedico guarda;} \\
+			\hline
+			Composición con \texttt{DocumentoVeterinario} (0..*) & Campo \texttt{private DocumentoVeterinario[] tiene;} \\
+			\hline
+			Agregación con \texttt{AntecedenteGenetico} (0..*) & Campo \texttt{private AntecedenteGenetico[] posee;} \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	Un fragmento representativo del código generado para la clase \texttt{Mascota} se muestra en el Listado~\ref{lst:mascota}.
+	
+	\begin{lstlisting}[caption={Clase \texttt{Mascota} generada por Instant Generator (fragmento).}, label={lst:mascota}]
+		using System;
+		
+		public class Mascota {
+			private int idMascota;
+			private string nombre;
+			private DateTime fechaNacimiento;
+			private bool visibilidadPerfil;
+			
+			public bool RegistrarMascota(MascotaDTO datos) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			
+			private HistorialMedico guarda;
+			private DocumentoVeterinario[] tiene;
+			private AntecedenteGenetico[] posee;
+		}
+	\end{lstlisting}
+	
+	\paragraph{Limitaciones detectadas del generador.} La verificación permitió identificar con claridad qué produce el generador y qué queda a cargo del desarrollador:
+	
+	\begin{itemize}[leftmargin=*, itemsep=2pt]
+		\item Los \textbf{cuerpos de los métodos no se generan}: todas las operaciones se emiten con \texttt{throw new NotImplementedException()}, por lo que la lógica de negocio debe programarse manualmente.
+		\item Las asociaciones de multiplicidad múltiple se generan como \textbf{arreglos} (\texttt{Tipo[]}) y no como colecciones genéricas \texttt{List<Tipo>}; si se desea trabajar con listas, es un ajuste manual posterior.
+		\item Los tipos auxiliares empleados en las firmas, como \texttt{MascotaDTO} y \texttt{UsuarioDTO}, no forman parte del modelo y deben definirse manualmente para que el proyecto compile sin errores.
+		\item El código generado corresponde a la \textbf{estructura} del sistema (entidades, campos y firmas), no a su comportamiento; esta es la frontera esperada de la generación estructural a partir de un diagrama de clases.
+	\end{itemize}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{figuras/CompilacionEjecucion.png}
+		\caption{Compilación y ejecución del código generado en el IDE de C\#.}
+		\label{fig:compilacion}
+	\end{figure}
+	
+	% ============================================================
+	% 9. CIERRE DEL CICLO (ROUNDTRIP)
+	% ============================================================
+	\section{Cierre del ciclo (roundtrip) y trazabilidad}
+	
+	Para evidenciar el cierre del ciclo se ejecutó un cambio controlado sobre el modelo y se regeneró el código, comprobando que la modificación se reflejara en el proyecto. El cambio consistió en agregar un nuevo atributo a la clase \texttt{Mascota} en el diagrama de Visual Paradigm; tras volver a ejecutar Instant Generator sobre la misma configuración, el archivo \texttt{Mascota.cs} incorporó el campo correspondiente, demostrando la trazabilidad directa entre una modificación en el modelo y su materialización en el código.
+	
+	Dado que las plantillas estándar de C\# regeneran el archivo completo bajo la política de sobrescritura, la trazabilidad modelo~$\to$~código es total para la estructura, pero cualquier lógica escrita manualmente en los cuerpos de los métodos se perdería en una regeneración salvo que se preserve mediante control de versiones o bloques protegidos. Esta observación es coherente con lo señalado en el marco teórico sobre los retos del \emph{round-trip engineering}~\cite{almutairi2022roundtrip}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{figuras/RoundtripModelo.png}
+		\caption{Modelo modificado con el nuevo atributo en la clase \texttt{Mascota}.}
+		\label{fig:roundtrip_modelo}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{figuras/RoundtripCodigo.png}
+		\caption{Código regenerado con el nuevo atributo reflejado.}
+		\label{fig:roundtrip_codigo}
+	\end{figure}
+	
+	% ============================================================
+	% 10. REPARTO DEL TRABAJO
+	% ============================================================
+	\section{Reparto del trabajo por integrante}
+	
+	El trabajo se distribuyó de forma equitativa entre los tres integrantes. La Tabla~\ref{tab:reparto} detalla cada tema del documento y su responsable.
+	
+	\begin{table}[H]
+		\caption{Reparto del trabajo por tema.}
+		\label{tab:reparto}
+		\centering
+		\begin{tabularx}{\linewidth}{|X|L{5.2cm}|}
+			\hline
+			\textbf{Tema} & \textbf{Desarrollado por} \\
+			\hline
+			Resumen & Fuertes Arraes Edson Daniel \\
+			\hline
+			Marco teórico & Cedeño Avila Winston Damian \\
+			\hline
+			Justificación de la herramienta MDD & Cedeño Coronado Wilson Lizandro \\
+			\hline
+			Descripción del subsistema del PFC & Cedeño Avila Winston Damian \\
+			\hline
+			Modelo UML de origen (diagrama de clases y perfil) & Fuertes Arraes Edson Daniel \\
+			\hline
+			Configuración del mecanismo de generación & Fuertes Arraes Edson Daniel \\
+			\hline
+			Proceso de generación de código & Fuertes Arraes Edson Daniel \\
+			\hline
+			Verificación del código generado & Fuertes Arraes Edson Daniel \\
+			\hline
+			Cierre del ciclo (roundtrip) & Fuertes Arraes Edson Daniel \\
+			\hline
+			Conclusiones & Cedeño Avila Winston Damian \\
+			\hline
+			Modelado en Visual Paradigm y generación de código & Fuertes Arraes Edson Daniel \\
+			\hline
+			Integración y compilación del documento LaTeX & Fuertes Arraes Edson Daniel \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	La evidencia objetiva de esta distribución se encuentra en el historial de \emph{commits} del repositorio GitHub, donde cada integrante contribuyó con su propia identidad Git. El registro de aportaciones puede consultarse en la pestaña \texttt{Insights $\to$ Contributors} del repositorio, cuya captura se incluye en \texttt{evidencias/capturas/}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{figuras/ContributorsGitHub.png}
+		\caption{Contribuciones por integrante en GitHub (Insights $\to$ Contributors).}
+		\label{fig:contributors}
+	\end{figure}
+	
+	% ============================================================
+	% 11. CONCLUSIONES
+	% ============================================================
+	\section{Conclusiones}
+	
+	El enfoque MDD aporta valor al PFC MundiPets cuando el modelo se utiliza como un artefacto operativo y no únicamente como documentación. La posibilidad de generar una base de código desde un diagrama UML reduce tareas repetitivas, favorece la consistencia estructural y crea una relación verificable entre las decisiones del modelo y los archivos producidos. La literatura reciente señala que la automatización y la trazabilidad son dos de los beneficios más relevantes de los enfoques dirigidos por modelos, siempre que exista disciplina en la gestión de modelos, reglas y artefactos generados \cite{sebastian2020codegen, david2023collaborative, krouwel2024enterprise}.
+	
+	En MundiPets, delimitar la demostración al subsistema de perfil de mascota y validación médica permite comprobar el ciclo sobre una parte real y representativa del PFC sin intentar automatizar el sistema completo. Este subsistema contiene entidades, asociaciones y operaciones suficientes para evidenciar generación, correspondencia modelo--código y un cambio de roundtrip. Por ello, el código generado puede ser aprovechable como línea base estructural para el desarrollo posterior, pero no debe asumirse como una implementación funcional completa: reglas de negocio, seguridad, validaciones específicas, integración y pruebas continuarán requiriendo trabajo de desarrollo.
+	
+	El principal aprendizaje metodológico es que la calidad de la generación depende directamente de la precisión del modelo y de la configuración del generador. Estereotipos, multiplicidades, tipos y convenciones deben definirse con intención, porque una inconsistencia del modelo se propaga a los artefactos generados. Del mismo modo, la regeneración exige una política explícita para proteger o separar el código escrito manualmente, ya que el roundtrip es uno de los puntos donde pueden aparecer pérdidas de cambios o divergencias entre modelo e implementación \cite{almutairi2022roundtrip}.
+	
+	% ============================================================
+	% REFERENCIAS
+	% ============================================================
+	\section{Referencias}
+	
+	\printbibliography[heading=none]
+	
+	\section*{Anexos}
+	\addcontentsline{toc}{section}{Anexos}
+	
+	\section*{Estructura del repositorio GitHub}
+	
+	\begin{verbatim}
+		PFC-MundiPets-MDD-EquipoG/
+		|-- README.md
+		|-- docs/
+		|   |-- informe.tex
+		|   |-- informe.pdf
+		|   |-- referencias.bib
+		|   `-- figuras/
+		|-- modelo/
+		|   |-- MundiPets-DiagramaClases.vpp
+		|   `-- perfiles/
+		|       `-- MundiPets-DiagramaPerfil.vpp
+		|-- plantillas/
+		|-- generado/
+		|-- evidencias/
+		|   `-- capturas/
+		`-- exposicion/
+		`-- diapositivas.pdf
+	\end{verbatim}
+	
+	\subsection*{Tabla de mapeo extensa (modelo \(\to\) código)}\label{sec:anexo_mapeo}
+	
+	La Tabla~\ref{tab:mapeo_extenso} presenta la correspondencia completa entre cada clase del modelo y el archivo generado, junto con las asociaciones materializadas en cada uno.
+	
+	\begin{table}[H]
+		\caption{Correspondencia completa modelo $\to$ código para el subsistema.}
+		\label{tab:mapeo_extenso}
+		\centering
+		\begin{tabularx}{\linewidth}{|L{3.5cm}|L{3cm}|X|}
+			\hline
+			\textbf{Clase UML} & \textbf{Archivo generado} & \textbf{Campos de asociación generados} \\
+			\hline
+			\texttt{Usuario} \guillemotleft Entity\guillemotright & \texttt{Usuario.cs} & \texttt{Mascota[] tiene}, \texttt{ValidacionMedica[] revisa} \\
+			\hline
+			\texttt{Mascota} \guillemotleft Entity\guillemotright & \texttt{Mascota.cs} & \texttt{HistorialMedico guarda}, \texttt{DocumentoVeterinario[] tiene}, \texttt{AntecedenteGenetico[] posee}, \texttt{ValidacionMedica[] pasa} \\
+			\hline
+			\texttt{HistorialMedico} \guillemotleft Entity\guillemotright & \texttt{HistorialMedico.cs} & \texttt{Mascota mascota} \\
+			\hline
+			\texttt{DocumentoVeterinario} \guillemotleft Entity\guillemotright & \texttt{DocumentoVeterinario.cs} & \texttt{Mascota tiene} \\
+			\hline
+			\texttt{CarnetVacunacion} \guillemotleft Entity\guillemotright & \texttt{CarnetVacunacion.cs} & \texttt{Vacuna[] constan}, \texttt{Mascota tiene} \\
+			\hline
+			\texttt{Vacuna} \guillemotleft Entity\guillemotright & \texttt{Vacuna.cs} & \texttt{CarnetVacunacion constan} \\
+			\hline
+			\texttt{ValidacionMedica} \guillemotleft Entity\guillemotright & \texttt{ValidacionMedica.cs} & \texttt{Usuario revisa}, \texttt{Mascota pasa} \\
+			\hline
+			\texttt{AntecedenteGenetico} \guillemotleft Entity\guillemotright & \texttt{AntecedenteGenetico.cs} & \texttt{Mascota posee} \\
+			\hline
+			\texttt{TipoUsuario} (enum) & \texttt{TipoUsuario.cs} & --- \\
+			\hline
+			\texttt{EstadoValidacion} (enum) & \texttt{EstadoValidacion.cs} & --- \\
+			\hline
+		\end{tabularx}
+	\end{table}
+	
+	\subsection*{Listados de código completo de las clases generadas}\label{sec:anexo_codigo}
+	
+	Se presenta a continuación el código C\# completo generado por Instant Generator para las ocho clases del dominio y las dos enumeraciones del subsistema.
+	
+	\begin{lstlisting}[caption={Clase \texttt{Usuario}.}, label={lst:usuario}]
+		using System;
+		
+		public class Usuario {
+			private int idUsuario;
+			private string nombre;
+			private string correo;
+			private string telefono;
+			private TipoUsuario tipo;
+			
+			public bool Registrar() {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public bool ActualizarDatos(UsuarioDTO datos) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public Mascota ConsultarPerfil(int idMascota) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			
+			private Mascota[] tiene;
+			
+			private ValidacionMedica[] revisa;
+			
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[caption={Clase \texttt{Mascota}.}, label={lst:mascota-full}]
+		using System;
+		
+		public class Mascota {
+			private int idMascota;
+			private string nombre;
+			private string especie;
+			private string raza;
+			private DateTime fechaNacimiento;
+			private char sexo;
+			private bool visibilidadPerfil;
+			
+			public bool RegistrarMascota(MascotaDTO datos) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public void ConfigurarPrivacidad(bool visible) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public bool ActualizarDatos(MascotaDTO datos) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			
+			private HistorialMedico guarda;
+			private DocumentoVeterinario[] tiene;
+			private AntecedenteGenetico[] posee;
+			private ValidacionMedica[] pasa;
+			
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[caption={Clase \texttt{HistorialMedico}.}, label={lst:historialmedico}]
+		using System;
+		
+		public class HistorialMedico {
+			private int idHistorial;
+			private DateTime fechaCreacion;
+			private string observacionesGenerales;
+			
+			public bool RegistrarEntrada(string obs) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public bool ActualizarEntrada(int idEntrada, string obs) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public string Consultar() {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			
+			private Mascota mascota;
+			
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[caption={Clase \texttt{DocumentoVeterinario}.}, label={lst:documentoveterinario}]
+		using System;
+		
+		public class DocumentoVeterinario {
+			private int idDocumento;
+			private string tipo;
+			private string archivoURL;
+			private DateTime fechaEmision;
+			
+			public bool Adjuntar(string archivo) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public bool Eliminar() {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			
+			private Mascota tiene;
+			
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[caption={Clase \texttt{CarnetVacunacion}.}, label={lst:carnetvacunacion}]
+		using System;
+		
+		public class CarnetVacunacion {
+			private int idCarnet;
+			private DateTime fechaApertura;
+			private string estado;
+			
+			public bool AgregarVacuna(Vacuna v) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public List<Vacuna> ListarVacunas() {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			
+			private Vacuna[] constan;
+			
+			private Mascota tiene;
+			
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[caption={Clase \texttt{Vacuna}.}, label={lst:vacuna}]
+		using System;
+		
+		public class Vacuna {
+			private int idVacuna;
+			private string nombre;
+			private DateTime fechaAplicacion;
+			private DateTime proximaDosis;
+			private string lote;
+			
+			public bool Registrar() {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			
+			private CarnetVacunacion constan;
+			
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[caption={Clase \texttt{ValidacionMedica}.}, label={lst:validacionmedica}]
+		using System;
+		
+		public class ValidacionMedica {
+			private int idValidacion;
+			private EstadoValidacion estado;
+			private DateTime fechaRevision;
+			private string observacionesRevisor;
+			
+			public void IniciarRevision() {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public bool Validar() {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public void Rechazar(string motivo) {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			
+			private Usuario revisa;
+			
+			private Mascota pasa;
+			
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[caption={Clase \texttt{AntecedenteGenetico}.}, label={lst:antecedentegenetico}]
+		using System;
+		
+		public class AntecedenteGenetico {
+			private int idAntecedente;
+			private string descripcion;
+			private string parentesco;
+			private string condicionHereditaria;
+			
+			public bool Registrar() {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			public string Consultar() {
+				throw new System.NotImplementedException("Not implemented");
+			}
+			
+			private Mascota posee;
+			
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[caption={Clase \texttt{TipoUsuario}.}, label={lst:tipousuario}]
+		using System;
+		
+		public enum TipoUsuario {
+			PROPIETARIO,
+			REFUGIO,
+			VETERINARIA,
+			ADOPTANTE,
+			
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[caption={Clase \texttt{EstadoValidacion}.}, label={lst:estadovalidacion}]
+		using System;
+		
+		public enum EstadoValidacion {
+			PENDIENTE,
+			EN_REVISION,
+			VALIDADO,
+			RECHAZADO,
+			
+		}
+	\end{lstlisting}
+	
+	\subsection*{Instrucciones detalladas de reproducibilidad}\label{sec:anexo_instrucciones}
+	
+	Para reproducir el ciclo completo a partir del repositorio:
+	
+	\begin{enumerate}[leftmargin=*, itemsep=2pt]
+		\item Clonar el repositorio: \url{git clone https://github.com/MiloSaurio4kHD/PFC-MundiPets-MDD-EquipoG.git}
+		\item Abrir el modelo \url*{modelo/MundiPets-DiagramaClases.vpp} en Visual Paradigm~17.3 o superior.
+		\item Ejecutar la generación desde \texttt{Tools $\to$ Code $\to$ Instant Generator}, seleccionando el lenguaje C\#, marcando las ocho clases y las dos enumeraciones, y estableciendo como salida la carpeta \texttt{generado/}, con la configuración documentada en la Sección~\ref{sec:diagrama_clases} y en \texttt{plantillas/}.
+		\item Abrir los archivos \texttt{.cs} resultantes en un entorno de C\# (Visual Studio Community o superior con .NET SDK) para compilarlos y ejecutar la unidad demostrable.
+		\item Para compilar el informe: en la carpeta \texttt{docs/}, ejecutar \texttt{pdflatex informe.tex}, luego \texttt{biber informe}, y \texttt{pdflatex informe.tex} dos veces más.
+	\end{enumerate}
+	
+	Las versiones exactas de software y las dependencias se detallan en el archivo \texttt{README.md} de la raíz del repositorio, con el cual este anexo debe mantenerse consistente.
+	
 \end{document}
